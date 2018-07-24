@@ -9,8 +9,7 @@ class Dbs extends CI_Model{
     //Codeigniter : Write Less Do More
   }
 
-  function getdata(){
-    return $this->db->get('user');
-  }
-
+  function check($table,$where){
+		return $this->db->get_where($table,$where);
+	}
 }

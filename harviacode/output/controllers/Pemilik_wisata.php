@@ -69,6 +69,7 @@ class Pemilik_wisata extends MY_Controller
 		'nama' => $this->input->post('nama',TRUE),
 		'email' => $this->input->post('email',TRUE),
 		'alamat' => $this->input->post('alamat',TRUE),
+		'jenis_kelamin' => $this->input->post('jenis_kelamin',TRUE),
 		'tanggal_lahir' => $this->input->post('tanggal_lahir',TRUE),
 		'file_ktp' => $this->input->post('file_ktp',TRUE),
 		'status' => $this->input->post('status',TRUE),
@@ -97,6 +98,7 @@ class Pemilik_wisata extends MY_Controller
 		'nama' => $this->input->post('nama',TRUE),
 		'email' => $this->input->post('email',TRUE),
 		'alamat' => $this->input->post('alamat',TRUE),
+		'jenis_kelamin' => $this->input->post('jenis_kelamin',TRUE),
 		'tanggal_lahir' => $this->input->post('tanggal_lahir',TRUE),
 		'file_ktp' => $this->input->post('file_ktp',TRUE),
 		'status' => $this->input->post('status',TRUE),
@@ -131,6 +133,7 @@ class Pemilik_wisata extends MY_Controller
 	$this->form_validation->set_rules('nama', 'nama', 'trim|required');
 	$this->form_validation->set_rules('email', 'email', 'trim|required');
 	$this->form_validation->set_rules('alamat', 'alamat', 'trim|required');
+	$this->form_validation->set_rules('jenis_kelamin', 'jenis kelamin', 'trim|required');
 	$this->form_validation->set_rules('tanggal_lahir', 'tanggal lahir', 'trim|required');
 	$this->form_validation->set_rules('file_ktp', 'file ktp', 'trim|required');
 	$this->form_validation->set_rules('status', 'status', 'trim|required');

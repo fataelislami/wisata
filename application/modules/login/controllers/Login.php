@@ -44,12 +44,14 @@ class Login extends MY_Controller{
       $getdatauser=$sql->result();
       $name=$getdatauser[0]->nama;
       $level=$getdatauser[0]->level;
+      $id_admin_dinas=$getdatauser[0]->id;
 			$data_session = array(//Data yang akan disimpan kedalam session
 				'username' => $username,
         'name'=>$name,
 				'status' => "login",
         'role'=> 2,
-        'level'=>$level
+        'level'=>$level,
+        'id'=>$id_admin_dinas
 				);
 
 			$this->session->set_userdata($data_session);
@@ -58,20 +60,27 @@ class Login extends MY_Controller{
     {
       $sql=$this->Dbs->check("pemilik_wisata",$where);
       $getdatauser=$sql->result();
-      $name=$getdatauser[0]->nama;
-      $level=$getdatauser[0]->level;
-			$data_session = array(//Data yang akan disimpan kedalam session
-				'username' => $username,
-        'name'=>$name,
-				'status' => "login",
-        'role'=> 3,
-        'level'=>$level
-				);
+      $status=$getdatauser[0]->status;
+      if($status=='aktif'){
+        $name=$getdatauser[0]->nama;
+        $level=$getdatauser[0]->level;
+  			$data_session = array(//Data yang akan disimpan kedalam session
+  				'username' => $username,
+          'name'=>$name,
+  				'status' => "login",
+          'role'=> 3,
+          'level'=>$level
+  				);
 
-			$this->session->set_userdata($data_session);
-        redirect(base_url("pemilik_wisata"));
+  			$this->session->set_userdata($data_session);
+          redirect(base_url("pemilik_wisata"));
+      }else{
+        $this->session->set_flashdata('flashMessage', 'Akun anda belum diaktifkan oleh admin dinas');
+          redirect(base_url("login"));
+      }
+
 		}else{
-      $data=array('errorMessage'=>'Username dan Password salah');
+      $this->session->set_flashdata('flashMessage', 'Username dan Password Salah');
       redirect(base_url('login'));
     }
   }

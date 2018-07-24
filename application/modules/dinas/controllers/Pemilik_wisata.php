@@ -42,29 +42,6 @@ class Pemilik_wisata extends MY_Controller
       $this->template->load($data);
     }
 
-    public function send($subject,$isi,$emailtujuan){
-
-    $config['protocol'] = 'smtp';
-    $config['smtp_host'] = 'ssl://smtp.gmail.com';
-    $config['smtp_port'] = '465';
-    $config['smtp_user'] = 'shopagansta@gmail.com';
-    $config['smtp_pass'] = 'faztars123'; //ini pake akun pass google email
-    $config['mailtype'] = 'html';
-    $config['charset'] = 'iso-8859-1';
-    $config['wordwrap'] = 'TRUE';
-    $config['newline'] = "\r\n";
-
-    $this->load->library('email', $config);
-    $this->email->initialize($config);
-
-    $this->email->from('shopagansta@gmail.com');
-    $this->email->to($emailtujuan);
-    $this->email->subject($subject);
-    $this->email->message($isi);
-    $this->email->set_mailtype('html');
-    $this->email->send();
-  }
-
     public function edit($id){
       $dataedit=$this->MPemilik_wisata->get_by_id($id);
       $data = array(
@@ -88,15 +65,15 @@ class Pemilik_wisata extends MY_Controller
         } else {
             $data = array(
 		'username' => $this->input->post('username',TRUE),
-		'password' => $this->input->post('password',TRUE),
+		'password' => md5($this->input->post('password',TRUE)),
 		'nama' => $this->input->post('nama',TRUE),
 		'email' => $this->input->post('email',TRUE),
 		'alamat' => $this->input->post('alamat',TRUE),
+		'jenis_kelamin' => $this->input->post('jenis_kelamin',TRUE),
 		'tanggal_lahir' => $this->input->post('tanggal_lahir',TRUE),
 		'file_ktp' => $this->input->post('file_ktp',TRUE),
 		'status' => $this->input->post('status',TRUE),
-		'id_admin_dinas' => $this->input->post('id_admin_dinas',TRUE),
-		'level' => $this->input->post('level',TRUE),
+		'id_admin_dinas' => $this->session->userdata('id'),//mengambil id admin dinas dari session ketika login
 	    );
 
             $this->MPemilik_wisata->insert($data);
@@ -114,24 +91,68 @@ class Pemilik_wisata extends MY_Controller
         if ($this->form_validation->run() == FALSE) {
             $this->edit($this->input->post('id', TRUE));
         } else {
+          if($_POST['password']!=''){
+            $data = array(
+        		'username' => $this->input->post('username',TRUE),
+        		'password' => md5($this->input->post('password',TRUE)),
+        		'nama' => $this->input->post('nama',TRUE),
+        		'email' => $this->input->post('email',TRUE),
+        		'alamat' => $this->input->post('alamat',TRUE),
+        		'jenis_kelamin' => $this->input->post('jenis_kelamin',TRUE),
+        		'tanggal_lahir' => $this->input->post('tanggal_lahir',TRUE),
+        		'file_ktp' => $this->input->post('file_ktp',TRUE),
+        		'status' => $this->input->post('status',TRUE),
+            'id_admin_dinas' => $this->session->userdata('id'),//mengambil id admin dinas dari session ketika login
+        	    );
+          }else{
             $data = array(
 		'username' => $this->input->post('username',TRUE),
-		'password' => $this->input->post('password',TRUE),
 		'nama' => $this->input->post('nama',TRUE),
 		'email' => $this->input->post('email',TRUE),
 		'alamat' => $this->input->post('alamat',TRUE),
+		'jenis_kelamin' => $this->input->post('jenis_kelamin',TRUE),
 		'tanggal_lahir' => $this->input->post('tanggal_lahir',TRUE),
 		'file_ktp' => $this->input->post('file_ktp',TRUE),
 		'status' => $this->input->post('status',TRUE),
-		'id_admin_dinas' => $this->input->post('id_admin_dinas',TRUE),
-		'level' => $this->input->post('level',TRUE),
+    'id_admin_dinas' => $this->session->userdata('id'),//mengambil id admin dinas dari session ketika login
 	    );
+          }
+
+          if($this->input->post('status',TRUE)=='aktif'){
+            $this->email('Info Aktivasi Akun','Selamat Akun Anda Sudah Diaktifkan Oleh Admin Dinas',$this->input->post('email',TRUE));
+          }else{
+            $this->email('Info Aktivasi Akun','Akun Anda Di nonaktifkan Oleh Admin Dinas',$this->input->post('email',TRUE));
+          }
+
 
             $this->MPemilik_wisata->update($this->input->post('id', TRUE), $data);
             $this->session->set_flashdata('message', 'Update Record Success');
             redirect(site_url('dinas/pemilik_wisata'));
         }
     }
+
+    public function email($subject,$isi,$emailtujuan){
+
+    $config['protocol'] = 'smtp';
+    $config['smtp_host'] = 'ssl://smtp.gmail.com';
+    $config['smtp_port'] = '465';
+    $config['smtp_user'] = 'shopagansta@gmail.com';
+    $config['smtp_pass'] = 'faztars123'; //ini pake akun pass google email
+    $config['mailtype'] = 'html';
+    $config['charset'] = 'iso-8859-1';
+    $config['wordwrap'] = 'TRUE';
+    $config['newline'] = "\r\n";
+
+    $this->load->library('email', $config);
+    $this->email->initialize($config);
+
+    $this->email->from('shopagansta@gmail.com');
+    $this->email->to($emailtujuan);
+    $this->email->subject($subject);
+    $this->email->message($isi);
+    $this->email->set_mailtype('html');
+    $this->email->send();
+  }
 
     public function delete($id)
     {
@@ -150,15 +171,13 @@ class Pemilik_wisata extends MY_Controller
     public function _rules()
     {
 	$this->form_validation->set_rules('username', 'username', 'trim|required');
-	$this->form_validation->set_rules('password', 'password', 'trim|required');
 	$this->form_validation->set_rules('nama', 'nama', 'trim|required');
 	$this->form_validation->set_rules('email', 'email', 'trim|required');
 	$this->form_validation->set_rules('alamat', 'alamat', 'trim|required');
+	$this->form_validation->set_rules('jenis_kelamin', 'jenis kelamin', 'trim|required');
 	$this->form_validation->set_rules('tanggal_lahir', 'tanggal lahir', 'trim|required');
 	$this->form_validation->set_rules('file_ktp', 'file ktp', 'trim|required');
 	$this->form_validation->set_rules('status', 'status', 'trim|required');
-	$this->form_validation->set_rules('id_admin_dinas', 'id admin dinas', 'trim|required');
-	$this->form_validation->set_rules('level', 'level', 'trim|required');
 
 	$this->form_validation->set_rules('id', 'id', 'trim');
 	$this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');

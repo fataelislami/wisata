@@ -25,6 +25,10 @@
             <input type="text" name="alamat" class="form-control" placeholder="">
     </div>
 	  <div class="form-group">
+            <label>jenis_kelamin</label>
+            <input type="text" name="jenis_kelamin" class="form-control" placeholder="">
+    </div>
+	  <div class="form-group">
             <label>tanggal_lahir</label>
             <input type="text" name="tanggal_lahir" class="form-control" placeholder="">
     </div>

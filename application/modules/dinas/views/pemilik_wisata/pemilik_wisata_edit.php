@@ -14,7 +14,7 @@
     </div>
 	  <div class="form-group">
             <label>password</label>
-            <input type="text" name="password" class="form-control" value="<?php echo $dataedit->password?>">
+            <input type="text" name="password" class="form-control" placeholder="masukan password baru">
     </div>
 	  <div class="form-group">
             <label>nama</label>
@@ -29,6 +29,10 @@
             <input type="text" name="alamat" class="form-control" value="<?php echo $dataedit->alamat?>">
     </div>
 	  <div class="form-group">
+            <label>jenis_kelamin</label>
+            <input type="text" name="jenis_kelamin" class="form-control" value="<?php echo $dataedit->jenis_kelamin?>">
+    </div>
+	  <div class="form-group">
             <label>tanggal_lahir</label>
             <input type="text" name="tanggal_lahir" class="form-control" value="<?php echo $dataedit->tanggal_lahir?>">
     </div>
@@ -38,16 +42,12 @@
     </div>
 	  <div class="form-group">
             <label>status</label>
-            <input type="text" name="status" class="form-control" value="<?php echo $dataedit->status?>">
+            <select class="form-control" name="status">
+              <option value="aktif" <?php echo ($dataedit->status =='aktif' ? 'selected':'') ?>>Aktif</option>
+              <option value="pending" <?php echo ($dataedit->status =='pending' ? 'selected':'') ?>>Pending</option>
+            </select>
     </div>
-	  <div class="form-group">
-            <label>id_admin_dinas</label>
-            <input type="text" name="id_admin_dinas" class="form-control" value="<?php echo $dataedit->id_admin_dinas?>">
-    </div>
-	  <div class="form-group">
-            <label>level</label>
-            <input type="text" name="level" class="form-control" value="<?php echo $dataedit->level?>">
-    </div>
+
 
                 <div class="form-group">
                   <button type="submit" class="btn btn-success waves-effect waves-light m-r-10">Submit</button>

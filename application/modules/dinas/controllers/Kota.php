@@ -19,13 +19,13 @@ class Kota extends MY_Controller
       $datafield=$this->Kota_model->get_field();//panggil ke modell
 
       $data = array(
-        'contain_view' => '{namamodule}/kota/kota_list',
-        'sidebar'=>'{namamodule}/sidebar',
-        'css'=>'{namamodule}/crudassets/css',
-        'script'=>'{namamodule}/crudassets/script',
+        'contain_view' => 'dinas/kota/kota_list',
+        'sidebar'=>'dinas/sidebar',
+        'css'=>'dinas/crudassets/css',
+        'script'=>'dinas/crudassets/script',
         'datakota'=>$datakota,
         'datafield'=>$datafield,
-        'module'=>'{namamodule}'
+        'module'=>'dinas'
        );
       $this->template->load($data);
     }
@@ -33,11 +33,11 @@ class Kota extends MY_Controller
 
     public function create(){
       $data = array(
-        'contain_view' => '{namamodule}/kota/kota_form',
-        'sidebar'=>'{namamodule}/sidebar',//Ini buat menu yang ditampilkan di module admin {DIKIRIM KE TEMPLATE}
-        'css'=>'{namamodule}/crudassets/css',//Ini buat kirim css dari page nya  {DIKIRIM KE TEMPLATE}
-        'script'=>'{namamodule}/crudassets/script',//ini buat javascript apa aja yang di load di page {DIKIRIM KE TEMPLATE}
-        'action'=>'{namamodule}/kota/create_action'
+        'contain_view' => 'dinas/kota/kota_form',
+        'sidebar'=>'dinas/sidebar',//Ini buat menu yang ditampilkan di module admin {DIKIRIM KE TEMPLATE}
+        'css'=>'dinas/crudassets/css',//Ini buat kirim css dari page nya  {DIKIRIM KE TEMPLATE}
+        'script'=>'dinas/crudassets/script',//ini buat javascript apa aja yang di load di page {DIKIRIM KE TEMPLATE}
+        'action'=>'dinas/kota/create_action'
        );
       $this->template->load($data);
     }
@@ -45,11 +45,11 @@ class Kota extends MY_Controller
     public function edit($id){
       $dataedit=$this->Kota_model->get_by_id($id);
       $data = array(
-        'contain_view' => '{namamodule}/kota/kota_edit',
-        'sidebar'=>'{namamodule}/sidebar',//Ini buat menu yang ditampilkan di module admin {DIKIRIM KE TEMPLATE}
-        'css'=>'{namamodule}/crudassets/css',//Ini buat kirim css dari page nya  {DIKIRIM KE TEMPLATE}
-        'script'=>'{namamodule}/crudassets/script',//ini buat javascript apa aja yang di load di page {DIKIRIM KE TEMPLATE}
-        'action'=>'{namamodule}/kota/update_action',
+        'contain_view' => 'dinas/kota/kota_edit',
+        'sidebar'=>'dinas/sidebar',//Ini buat menu yang ditampilkan di module admin {DIKIRIM KE TEMPLATE}
+        'css'=>'dinas/crudassets/css',//Ini buat kirim css dari page nya  {DIKIRIM KE TEMPLATE}
+        'script'=>'dinas/crudassets/script',//ini buat javascript apa aja yang di load di page {DIKIRIM KE TEMPLATE}
+        'action'=>'dinas/kota/update_action',
         'dataedit'=>$dataedit
        );
       $this->template->load($data);
@@ -69,7 +69,7 @@ class Kota extends MY_Controller
 
             $this->Kota_model->insert($data);
             $this->session->set_flashdata('message', 'Create Record Success');
-            redirect(site_url('{namamodule}/kota'));
+            redirect(site_url('dinas/kota'));
         }
     }
 
@@ -88,7 +88,7 @@ class Kota extends MY_Controller
 
             $this->Kota_model->update($this->input->post('id', TRUE), $data);
             $this->session->set_flashdata('message', 'Update Record Success');
-            redirect(site_url('{namamodule}/kota'));
+            redirect(site_url('dinas/kota'));
         }
     }
 
@@ -99,10 +99,10 @@ class Kota extends MY_Controller
         if ($row) {
             $this->Kota_model->delete($id);
             $this->session->set_flashdata('message', 'Delete Record Success');
-            redirect(site_url('{namamodule}/kota'));
+            redirect(site_url('dinas/kota'));
         } else {
             $this->session->set_flashdata('message', 'Record Not Found');
-            redirect(site_url('{namamodule}/kota'));
+            redirect(site_url('dinas/kota'));
         }
     }
 

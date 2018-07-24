@@ -29,6 +29,10 @@
             <input type="text" name="alamat" class="form-control" value="<?php echo $dataedit->alamat?>">
     </div>
 	  <div class="form-group">
+            <label>jenis_kelamin</label>
+            <input type="text" name="jenis_kelamin" class="form-control" value="<?php echo $dataedit->jenis_kelamin?>">
+    </div>
+	  <div class="form-group">
             <label>tanggal_lahir</label>
             <input type="text" name="tanggal_lahir" class="form-control" value="<?php echo $dataedit->tanggal_lahir?>">
     </div>
