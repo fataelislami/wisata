@@ -22,43 +22,58 @@ class Login extends MY_Controller{
 			'username' => $username,
 			'password' => md5($password)
 			);
-		$sql = $this->Dbs->check("user",$where);
-    $check=$sql->num_rows();
-		if($check > 0){
+		if($this->Dbs->check("superadmin",$where)->num_rows()>0){
+      $sql=$this->Dbs->check("superadmin",$where);
       $getdatauser=$sql->result();
-      $role=$getdatauser[0]->id_role;//Mengambil role dari table user
-      $name=$getdatauser[0]->username;
-      if($role==1){
-        $level='admin';
-      }
-      if($role==2){
-        $level='dinas';
-      }
-      if($role==3){
-        $level='pemilik_wisata';
-      }
+      $name=$getdatauser[0]->nama;
+      $level=$getdatauser[0]->level;
 			$data_session = array(//Data yang akan disimpan kedalam session
 				'username' => $username,
         'name'=>$name,
 				'status' => "login",
-        'role'=> $role,
+        'role'=> 1,
         'level'=>$level
 				);
 
 			$this->session->set_userdata($data_session);
-
-      if($role==1){
         redirect(base_url("admin"));
-      }else if($role==2){
-        redirect(base_url("dinas"));
-      }else{
-        redirect(base_url());
-      }
 
+		}else if($this->Dbs->check("admin_dinas",$where)->num_rows()>0)
+    {
+      $sql=$this->Dbs->check("admin_dinas",$where);
+      $getdatauser=$sql->result();
+      $name=$getdatauser[0]->nama;
+      $level=$getdatauser[0]->level;
+			$data_session = array(//Data yang akan disimpan kedalam session
+				'username' => $username,
+        'name'=>$name,
+				'status' => "login",
+        'role'=> 2,
+        'level'=>$level
+				);
+
+			$this->session->set_userdata($data_session);
+        redirect(base_url("dinas"));
+		}else if($this->Dbs->check("pemilik_wisata",$where)->num_rows()>0)
+    {
+      $sql=$this->Dbs->check("pemilik_wisata",$where);
+      $getdatauser=$sql->result();
+      $name=$getdatauser[0]->nama;
+      $level=$getdatauser[0]->level;
+			$data_session = array(//Data yang akan disimpan kedalam session
+				'username' => $username,
+        'name'=>$name,
+				'status' => "login",
+        'role'=> 3,
+        'level'=>$level
+				);
+
+			$this->session->set_userdata($data_session);
+        redirect(base_url("pemilik_wisata"));
 		}else{
       $data=array('errorMessage'=>'Username dan Password salah');
       redirect(base_url('login'));
-		}
+    }
   }
 
 
