@@ -8,15 +8,15 @@ class Kota extends MY_Controller
     function __construct()
     {
         parent::__construct();
-        $this->load->model('Kota_model');
+        $this->load->model('MKota');
         $this->load->library('form_validation');
     }
 
     public function index()
     {
 
-      $datakota=$this->Kota_model->get_all();//panggil ke modell
-      $datafield=$this->Kota_model->get_field();//panggil ke modell
+      $datakota=$this->MKota->get_all();//panggil ke modell
+      $datafield=$this->MKota->get_field();//panggil ke modell
 
       $data = array(
         'contain_view' => '{namamodule}/kota/kota_list',
@@ -43,7 +43,7 @@ class Kota extends MY_Controller
     }
 
     public function edit($id){
-      $dataedit=$this->Kota_model->get_by_id($id);
+      $dataedit=$this->MKota->get_by_id($id);
       $data = array(
         'contain_view' => '{namamodule}/kota/kota_edit',
         'sidebar'=>'{namamodule}/sidebar',//Ini buat menu yang ditampilkan di module admin {DIKIRIM KE TEMPLATE}
@@ -67,7 +67,7 @@ class Kota extends MY_Controller
 		'nama_kota' => $this->input->post('nama_kota',TRUE),
 	    );
 
-            $this->Kota_model->insert($data);
+            $this->MKota->insert($data);
             $this->session->set_flashdata('message', 'Create Record Success');
             redirect(site_url('{namamodule}/kota'));
         }
@@ -86,7 +86,7 @@ class Kota extends MY_Controller
 		'nama_kota' => $this->input->post('nama_kota',TRUE),
 	    );
 
-            $this->Kota_model->update($this->input->post('id', TRUE), $data);
+            $this->MKota->update($this->input->post('id', TRUE), $data);
             $this->session->set_flashdata('message', 'Update Record Success');
             redirect(site_url('{namamodule}/kota'));
         }
@@ -94,10 +94,10 @@ class Kota extends MY_Controller
 
     public function delete($id)
     {
-        $row = $this->Kota_model->get_by_id($id);
+        $row = $this->MKota->get_by_id($id);
 
         if ($row) {
-            $this->Kota_model->delete($id);
+            $this->MKota->delete($id);
             $this->session->set_flashdata('message', 'Delete Record Success');
             redirect(site_url('{namamodule}/kota'));
         } else {
