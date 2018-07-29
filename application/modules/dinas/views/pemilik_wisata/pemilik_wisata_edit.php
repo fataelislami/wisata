@@ -36,16 +36,27 @@
             <label>tanggal_lahir</label>
             <input type="text" name="tanggal_lahir" class="form-control" value="<?php echo $dataedit->tanggal_lahir?>">
     </div>
+    <div class="form-group">
+            <label>No_ktp</label>
+            <input type="text" name="no_ktp" class="form-control" value="<?php echo $dataedit->no_ktp?>">
+    </div>
 	  <div class="form-group">
             <label>file_ktp</label>
             <input type="text" name="file_ktp" class="form-control" value="<?php echo $dataedit->file_ktp?>">
     </div>
 	  <div class="form-group">
-            <label>status</label>
+            <label>status akun</label>
             <select class="form-control" name="status">
               <option value="aktif" <?php echo ($dataedit->status =='aktif' ? 'selected':'') ?>>Aktif</option>
               <option value="pending" <?php echo ($dataedit->status =='pending' ? 'selected':'') ?>>Pending</option>
             </select>
+    </div>
+    <div class="form-group">
+      <label>aktivasi akun</label>
+      <select class="form-control" name="aktivasi">
+        <option value="ya" <?php echo ($dataedit->id_admin_dinas !=null ? 'selected':'') ?>>Ya</option>
+        <option value="tidak" <?php echo ($dataedit->id_admin_dinas ==null ? 'selected':'') ?>>Tidak</option>
+      </select>
     </div>
 
 

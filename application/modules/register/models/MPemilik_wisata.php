@@ -84,6 +84,12 @@ class MPemilik_wisata extends CI_Model
         $this->db->update($this->table, $data);
     }
 
+    function update_by_username($username, $data)
+    {
+        $this->db->where('username', $username);
+        $this->db->update($this->table, $data);
+    }
+
     // delete data
     function delete($id)
     {

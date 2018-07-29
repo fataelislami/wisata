@@ -43,7 +43,6 @@ echo "<script>alert('$errorMessage')</script>";
   <div class="login-box card">
     <div class="card-body">
       <form class="form-horizontal form-material" method="post" id="loginform" action="register/action">
-        <a href="javascript:void(0)" class="text-center db"><img src="assets/images/logo-icon.png" alt="Home" /><br/></a>
         <div class="form-group m-t-40">
           <div class="col-xs-12">
             <input class="form-control" type="text" name="nama" required="" placeholder="Nama">
@@ -85,10 +84,14 @@ echo "<script>alert('$errorMessage')</script>";
         </div>
         <div class="form-group">
           <div class="col-xs-12">
+            <input class="form-control" type="text" name="no_ktp" required="" placeholder="No Ktp">
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-xs-12">
             <input class="form-control" type="file" name="file_ktp" required>
           </div>
         </div>
-
 
         <div class="form-group text-center m-t-20">
           <div class="col-xs-12">

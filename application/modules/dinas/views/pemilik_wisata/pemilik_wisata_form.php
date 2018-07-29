@@ -32,15 +32,26 @@
             <label>tanggal_lahir</label>
             <input type="text" name="tanggal_lahir" class="form-control" placeholder="">
     </div>
+    <div class="form-group">
+            <label>No Ktp</label>
+            <input type="text" name="no_ktp" class="form-control" placeholder="">
+    </div>
 	  <div class="form-group">
             <label>file_ktp</label>
             <input type="text" name="file_ktp" class="form-control" placeholder="">
     </div>
 	  <div class="form-group">
-      <label>status</label>
+      <label>status akun</label>
       <select class="form-control" name="status">
         <option value="aktif">Aktif</option>
         <option value="pending">Pending</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label>aktivasi akun</label>
+      <select class="form-control" name="aktivasi">
+        <option value="ya">Ya</option>
+        <option value="tidak">Tidak</option>
       </select>
     </div>
 	    <input type="hidden" name="id" />

@@ -75,7 +75,7 @@ class Login extends MY_Controller{
   			$this->session->set_userdata($data_session);
           redirect(base_url("pemilik_wisata"));
       }else{
-        $this->session->set_flashdata('flashMessage', 'Akun anda belum diaktifkan oleh admin dinas');
+        $this->session->set_flashdata('flashMessage', 'Akun anda belum diaktifkan silahkan cek email');
           redirect(base_url("login"));
       }
 
