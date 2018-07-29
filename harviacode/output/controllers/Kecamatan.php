@@ -64,6 +64,7 @@ class Kecamatan extends MY_Controller
             $this->create();
         } else {
             $data = array(
+		'nama' => $this->input->post('nama',TRUE),
 		'id_kota' => $this->input->post('id_kota',TRUE),
 	    );
 
@@ -83,6 +84,7 @@ class Kecamatan extends MY_Controller
             $this->edit($this->input->post('id', TRUE));
         } else {
             $data = array(
+		'nama' => $this->input->post('nama',TRUE),
 		'id_kota' => $this->input->post('id_kota',TRUE),
 	    );
 
@@ -108,6 +110,7 @@ class Kecamatan extends MY_Controller
 
     public function _rules()
     {
+	$this->form_validation->set_rules('nama', 'nama', 'trim|required');
 	$this->form_validation->set_rules('id_kota', 'id kota', 'trim|required');
 
 	$this->form_validation->set_rules('id', 'id', 'trim');

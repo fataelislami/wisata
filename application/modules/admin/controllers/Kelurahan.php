@@ -64,7 +64,7 @@ class Kelurahan extends MY_Controller
             $this->create();
         } else {
             $data = array(
-		'nama_kelurahan' => $this->input->post('nama_kelurahan',TRUE),
+		'nama' => $this->input->post('nama',TRUE),
 		'id_kecamatan' => $this->input->post('id_kecamatan',TRUE),
 	    );
 
@@ -84,7 +84,7 @@ class Kelurahan extends MY_Controller
             $this->edit($this->input->post('id', TRUE));
         } else {
             $data = array(
-		'nama_kelurahan' => $this->input->post('nama_kelurahan',TRUE),
+		'nama' => $this->input->post('nama',TRUE),
 		'id_kecamatan' => $this->input->post('id_kecamatan',TRUE),
 	    );
 
@@ -110,7 +110,7 @@ class Kelurahan extends MY_Controller
 
     public function _rules()
     {
-	$this->form_validation->set_rules('nama_kelurahan', 'nama kelurahan', 'trim|required');
+	$this->form_validation->set_rules('nama', 'nama', 'trim|required');
 	$this->form_validation->set_rules('id_kecamatan', 'id kecamatan', 'trim|required');
 
 	$this->form_validation->set_rules('id', 'id', 'trim');

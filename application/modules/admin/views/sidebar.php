@@ -5,6 +5,9 @@
             <a class="waves-effect waves-dark" href="<?php echo base_url()?>admin"><i class="mdi mdi-gauge"></i><span class="hide-menu">Dashboard</span></a>
         </li>
         <li>
+            <a class="waves-effect waves-dark" href="<?php echo base_url()?>admin/data_wisata"><i class="mdi mdi-gauge"></i><span class="hide-menu">Data Wisata</span></a>
+        </li>
+        <li>
             <a class="waves-effect waves-dark" href="<?php echo base_url()?>admin/dinas"><i class="mdi mdi-gauge"></i><span class="hide-menu">Dinas</span></a>
         </li>
         <li>

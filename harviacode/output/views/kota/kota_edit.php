@@ -9,8 +9,8 @@
                     <input type="text" name="id" class="form-control" placeholder="" value="<?php echo $dataedit->id?>" readonly>
             </div>
 	  <div class="form-group">
-            <label>nama_kota</label>
-            <input type="text" name="nama_kota" class="form-control" value="<?php echo $dataedit->nama_kota?>">
+            <label>nama</label>
+            <input type="text" name="nama" class="form-control" value="<?php echo $dataedit->nama?>">
     </div>
 	
                 <div class="form-group">

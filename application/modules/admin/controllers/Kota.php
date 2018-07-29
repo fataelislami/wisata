@@ -64,7 +64,7 @@ class Kota extends MY_Controller
             $this->create();
         } else {
             $data = array(
-		'nama_kota' => $this->input->post('nama_kota',TRUE),
+		'nama' => $this->input->post('nama',TRUE),
 	    );
 
             $this->MKota->insert($data);
@@ -83,7 +83,7 @@ class Kota extends MY_Controller
             $this->edit($this->input->post('id', TRUE));
         } else {
             $data = array(
-		'nama_kota' => $this->input->post('nama_kota',TRUE),
+		'nama' => $this->input->post('nama',TRUE),
 	    );
 
             $this->MKota->update($this->input->post('id', TRUE), $data);
@@ -108,7 +108,7 @@ class Kota extends MY_Controller
 
     public function _rules()
     {
-	$this->form_validation->set_rules('nama_kota', 'nama kota', 'trim|required');
+	$this->form_validation->set_rules('nama', 'nama', 'trim|required');
 
 	$this->form_validation->set_rules('id', 'id', 'trim');
 	$this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');
