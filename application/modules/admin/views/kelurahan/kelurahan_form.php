@@ -5,8 +5,8 @@
             <h4 class="card-title">Tambah Kelurahan</h4>
             <form class="form-material m-t-40" method="post" action="<?php echo base_url().$action ?>">
 	  <div class="form-group">
-            <label>nama_kelurahan</label>
-            <input type="text" name="nama_kelurahan" class="form-control" placeholder="">
+            <label>nama</label>
+            <input type="text" name="nama" class="form-control" placeholder="">
     </div>
 	  <div class="form-group">
             <label>id_kecamatan</label>
