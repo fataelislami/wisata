@@ -69,11 +69,6 @@ echo "<script>alert('$errorMessage')</script>";
         </div>
         <div class="form-group m-t-40">
           <div class="col-xs-12">
-            <input class="form-control" type="text" name="username" required="" placeholder="Username">
-          </div>
-        </div>
-        <div class="form-group m-t-40">
-          <div class="col-xs-12">
             <input class="form-control" type="text" name="email" required="" placeholder="Email">
           </div>
         </div>

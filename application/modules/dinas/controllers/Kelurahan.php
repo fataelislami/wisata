@@ -8,36 +8,37 @@ class Kelurahan extends MY_Controller
     function __construct()
     {
         parent::__construct();
-        $this->load->model('MKelurahan');
+        $this->load->model(array('Model_join','MKelurahan'));
         $this->load->library('form_validation');
     }
 
     public function index()
     {
 
-      $datakelurahan=$this->MKelurahan->get_all();//panggil ke modell
-      $datafield=$this->MKelurahan->get_field();//panggil ke modell
+      $datakelurahan=$this->Model_join->kelurahan_dan_kecamatan($this->session->userdata('id_kota'));//panggil ke modell
+      // $datafield=$this->MKelurahan->get_field();//panggil ke modell
 
       $data = array(
-        'contain_view' => 'admin/kelurahan/kelurahan_list',
-        'sidebar'=>'admin/sidebar',
-        'css'=>'admin/crudassets/css',
-        'script'=>'admin/crudassets/script',
+        'contain_view' => 'dinas/kelurahan/kelurahan_list',
+        'sidebar'=>'dinas/sidebar',
+        'css'=>'dinas/crudassets/css',
+        'script'=>'dinas/crudassets/script',
         'datakelurahan'=>$datakelurahan,
-        'datafield'=>$datafield,
-        'module'=>'admin'
+        'module'=>'dinas'
        );
       $this->template->load($data);
     }
 
 
     public function create(){
+      $datakecamatan=$this->Model_join->kelurahan_dan_kecamatan_distinct($this->session->userdata('id_kota'));
       $data = array(
-        'contain_view' => 'admin/kelurahan/kelurahan_form',
-        'sidebar'=>'admin/sidebar',//Ini buat menu yang ditampilkan di module admin {DIKIRIM KE TEMPLATE}
-        'css'=>'admin/crudassets/css',//Ini buat kirim css dari page nya  {DIKIRIM KE TEMPLATE}
-        'script'=>'admin/crudassets/script',//ini buat javascript apa aja yang di load di page {DIKIRIM KE TEMPLATE}
-        'action'=>'admin/kelurahan/create_action'
+        'contain_view' => 'dinas/kelurahan/kelurahan_form',
+        'sidebar'=>'dinas/sidebar',//Ini buat menu yang ditampilkan di module admin {DIKIRIM KE TEMPLATE}
+        'css'=>'dinas/crudassets/css',//Ini buat kirim css dari page nya  {DIKIRIM KE TEMPLATE}
+        'script'=>'dinas/crudassets/script',//ini buat javascript apa aja yang di load di page {DIKIRIM KE TEMPLATE}
+        'action'=>'dinas/kelurahan/create_action',
+        'datakecamatan'=>$datakecamatan
        );
       $this->template->load($data);
     }
@@ -45,15 +46,17 @@ class Kelurahan extends MY_Controller
     public function edit($id){
       $dataedit=$this->MKelurahan->get_by_id($id);
       $data = array(
-        'contain_view' => 'admin/kelurahan/kelurahan_edit',
-        'sidebar'=>'admin/sidebar',//Ini buat menu yang ditampilkan di module admin {DIKIRIM KE TEMPLATE}
-        'css'=>'admin/crudassets/css',//Ini buat kirim css dari page nya  {DIKIRIM KE TEMPLATE}
-        'script'=>'admin/crudassets/script',//ini buat javascript apa aja yang di load di page {DIKIRIM KE TEMPLATE}
-        'action'=>'admin/kelurahan/update_action',
+        'contain_view' => 'dinas/kelurahan/kelurahan_edit',
+        'sidebar'=>'dinas/sidebar',//Ini buat menu yang ditampilkan di module admin {DIKIRIM KE TEMPLATE}
+        'css'=>'dinas/crudassets/css',//Ini buat kirim css dari page nya  {DIKIRIM KE TEMPLATE}
+        'script'=>'dinas/crudassets/script',//ini buat javascript apa aja yang di load di page {DIKIRIM KE TEMPLATE}
+        'action'=>'dinas/kelurahan/update_action',
         'dataedit'=>$dataedit
        );
       $this->template->load($data);
     }
+
+
 
 
     public function create_action()
@@ -70,7 +73,7 @@ class Kelurahan extends MY_Controller
 
             $this->MKelurahan->insert($data);
             $this->session->set_flashdata('message', 'Create Record Success');
-            redirect(site_url('admin/kelurahan'));
+            redirect(site_url('dinas/kelurahan'));
         }
     }
 
@@ -90,7 +93,7 @@ class Kelurahan extends MY_Controller
 
             $this->MKelurahan->update($this->input->post('id', TRUE), $data);
             $this->session->set_flashdata('message', 'Update Record Success');
-            redirect(site_url('admin/kelurahan'));
+            redirect(site_url('dinas/kelurahan'));
         }
     }
 
@@ -101,10 +104,10 @@ class Kelurahan extends MY_Controller
         if ($row) {
             $this->MKelurahan->delete($id);
             $this->session->set_flashdata('message', 'Delete Record Success');
-            redirect(site_url('admin/kelurahan'));
+            redirect(site_url('dinas/kelurahan'));
         } else {
             $this->session->set_flashdata('message', 'Record Not Found');
-            redirect(site_url('admin/kelurahan'));
+            redirect(site_url('dinas/kelurahan'));
         }
     }
 

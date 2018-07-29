@@ -19,9 +19,9 @@ class Register extends MY_Controller{
     echo $this->session->flashdata('errorMessage');
   }
   function action(){
-    $username=$this->input->post('username',TRUE);
+    $ktp=$this->input->post('no_ktp',TRUE);
     $data = array(
-'username' => $this->input->post('username',TRUE),
+'username' => $this->input->post('email',TRUE),
 'password' => md5($this->input->post('password',TRUE)),
 'nama' => $this->input->post('nama',TRUE),
 'email' => $this->input->post('email',TRUE),
@@ -41,7 +41,7 @@ class Register extends MY_Controller{
   		}else{
         $this->MPemilik_wisata->insert($data);
         $this->email('Aktivasi Akun Wisata IF-11',"Silahkan klik link berikut untuk mengaktifkan akun <br>
-        <a href='".base_url()."register/activate?username=$username'>Klik Disini Untuk Aktivasi Akun</a>",$this->input->post('email',TRUE));
+        <a href='".base_url()."register/activate?ktp=$ktp'>Klik Disini Untuk Aktivasi Akun</a>",$this->input->post('email',TRUE));
         $this->session->set_flashdata('flashMessage', 'Pendaftaran Berhasil, Silahkan Cek Email Untuk Aktivasi Akun Anda');
       redirect(site_url('login'));
   		}
@@ -49,9 +49,9 @@ class Register extends MY_Controller{
   }
 
   function activate(){
-      $username=$_GET['username'];
+      $ktp=$_GET['ktp'];
       $data['status']='aktif';
-      $this->MPemilik_wisata->update_by_username($username,$data);
+      $this->MPemilik_wisata->update_by_ktp($ktp,$data);
       $this->session->set_flashdata('flashMessage', 'Aktivasi Berhasil, Silahkan Login');
       redirect(site_url('login'));
 

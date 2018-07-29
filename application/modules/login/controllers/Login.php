@@ -45,13 +45,15 @@ class Login extends MY_Controller{
       $name=$getdatauser[0]->nama;
       $level=$getdatauser[0]->level;
       $id_admin_dinas=$getdatauser[0]->id;
+      $id_kota=$getdatauser[0]->kota;
 			$data_session = array(//Data yang akan disimpan kedalam session
 				'username' => $username,
         'name'=>$name,
 				'status' => "login",
         'role'=> 2,
         'level'=>$level,
-        'id'=>$id_admin_dinas
+        'id'=>$id_admin_dinas,
+        'id_kota'=>$id_kota
 				);
 
 			$this->session->set_userdata($data_session);
@@ -64,12 +66,15 @@ class Login extends MY_Controller{
       if($status=='aktif'){
         $name=$getdatauser[0]->nama;
         $level=$getdatauser[0]->level;
+        $id_user=$getdatauser[0]->id;
+
   			$data_session = array(//Data yang akan disimpan kedalam session
   				'username' => $username,
           'name'=>$name,
   				'status' => "login",
           'role'=> 3,
-          'level'=>$level
+          'level'=>$level,
+          'id'=>$id_user
   				);
 
   			$this->session->set_userdata($data_session);

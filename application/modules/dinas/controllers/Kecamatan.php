@@ -8,49 +8,53 @@ class Kecamatan extends MY_Controller
     function __construct()
     {
         parent::__construct();
-        $this->load->model('MKecamatan');
+        $this->load->model(array('MKecamatan','MKota'));
         $this->load->library('form_validation');
     }
 
     public function index()
     {
 
-      $datakecamatan=$this->MKecamatan->get_all();//panggil ke modell
+      $datakecamatan=$this->MKecamatan->get_by_kota($this->session->userdata('id_kota'));//panggil ke modell
       $datafield=$this->MKecamatan->get_field();//panggil ke modell
 
       $data = array(
-        'contain_view' => 'admin/kecamatan/kecamatan_list',
-        'sidebar'=>'admin/sidebar',
-        'css'=>'admin/crudassets/css',
-        'script'=>'admin/crudassets/script',
+        'contain_view' => 'dinas/kecamatan/kecamatan_list',
+        'sidebar'=>'dinas/sidebar',
+        'css'=>'dinas/crudassets/css',
+        'script'=>'dinas/crudassets/script',
         'datakecamatan'=>$datakecamatan,
         'datafield'=>$datafield,
-        'module'=>'admin'
+        'module'=>'dinas'
        );
       $this->template->load($data);
     }
 
 
     public function create(){
+      $data_kota=$this->MKota->get_by_id($this->session->userdata('id_kota'));
       $data = array(
-        'contain_view' => 'admin/kecamatan/kecamatan_form',
-        'sidebar'=>'admin/sidebar',//Ini buat menu yang ditampilkan di module admin {DIKIRIM KE TEMPLATE}
-        'css'=>'admin/crudassets/css',//Ini buat kirim css dari page nya  {DIKIRIM KE TEMPLATE}
-        'script'=>'admin/crudassets/script',//ini buat javascript apa aja yang di load di page {DIKIRIM KE TEMPLATE}
-        'action'=>'admin/kecamatan/create_action'
+        'contain_view' => 'dinas/kecamatan/kecamatan_form',
+        'sidebar'=>'dinas/sidebar',//Ini buat menu yang ditampilkan di module admin {DIKIRIM KE TEMPLATE}
+        'css'=>'dinas/crudassets/css',//Ini buat kirim css dari page nya  {DIKIRIM KE TEMPLATE}
+        'script'=>'dinas/crudassets/script',//ini buat javascript apa aja yang di load di page {DIKIRIM KE TEMPLATE}
+        'action'=>'dinas/kecamatan/create_action',
+        'data_kota'=>$data_kota
        );
       $this->template->load($data);
     }
 
     public function edit($id){
       $dataedit=$this->MKecamatan->get_by_id($id);
+      $data_kota=$this->MKota->get_by_id($this->session->userdata('id_kota'));
       $data = array(
-        'contain_view' => 'admin/kecamatan/kecamatan_edit',
-        'sidebar'=>'admin/sidebar',//Ini buat menu yang ditampilkan di module admin {DIKIRIM KE TEMPLATE}
-        'css'=>'admin/crudassets/css',//Ini buat kirim css dari page nya  {DIKIRIM KE TEMPLATE}
-        'script'=>'admin/crudassets/script',//ini buat javascript apa aja yang di load di page {DIKIRIM KE TEMPLATE}
-        'action'=>'admin/kecamatan/update_action',
-        'dataedit'=>$dataedit
+        'contain_view' => 'dinas/kecamatan/kecamatan_edit',
+        'sidebar'=>'dinas/sidebar',//Ini buat menu yang ditampilkan di module admin {DIKIRIM KE TEMPLATE}
+        'css'=>'dinas/crudassets/css',//Ini buat kirim css dari page nya  {DIKIRIM KE TEMPLATE}
+        'script'=>'dinas/crudassets/script',//ini buat javascript apa aja yang di load di page {DIKIRIM KE TEMPLATE}
+        'action'=>'dinas/kecamatan/update_action',
+        'dataedit'=>$dataedit,
+        'data_kota'=>$data_kota
        );
       $this->template->load($data);
     }
@@ -70,7 +74,7 @@ class Kecamatan extends MY_Controller
 
             $this->MKecamatan->insert($data);
             $this->session->set_flashdata('message', 'Create Record Success');
-            redirect(site_url('admin/kecamatan'));
+            redirect(site_url('dinas/kecamatan'));
         }
     }
 
@@ -90,7 +94,7 @@ class Kecamatan extends MY_Controller
 
             $this->MKecamatan->update($this->input->post('id', TRUE), $data);
             $this->session->set_flashdata('message', 'Update Record Success');
-            redirect(site_url('admin/kecamatan'));
+            redirect(site_url('dinas/kecamatan'));
         }
     }
 
@@ -101,10 +105,10 @@ class Kecamatan extends MY_Controller
         if ($row) {
             $this->MKecamatan->delete($id);
             $this->session->set_flashdata('message', 'Delete Record Success');
-            redirect(site_url('admin/kecamatan'));
+            redirect(site_url('dinas/kecamatan'));
         } else {
             $this->session->set_flashdata('message', 'Record Not Found');
-            redirect(site_url('admin/kecamatan'));
+            redirect(site_url('dinas/kecamatan'));
         }
     }
 

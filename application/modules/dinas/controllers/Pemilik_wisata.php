@@ -64,7 +64,7 @@ class Pemilik_wisata extends MY_Controller
             $this->create();
         } else {
             $data = array(
-		'username' => $this->input->post('username',TRUE),
+		'username' => $this->input->post('email',TRUE),
 		'password' => md5($this->input->post('password',TRUE)),
 		'nama' => $this->input->post('nama',TRUE),
 		'email' => $this->input->post('email',TRUE),
@@ -99,7 +99,7 @@ class Pemilik_wisata extends MY_Controller
               $id_admin_dinasi=null;
             }
             $data = array(
-        		'username' => $this->input->post('username',TRUE),
+        		'username' => $this->input->post('email',TRUE),
         		'password' => md5($this->input->post('password',TRUE)),
         		'nama' => $this->input->post('nama',TRUE),
         		'email' => $this->input->post('email',TRUE),
@@ -120,7 +120,7 @@ class Pemilik_wisata extends MY_Controller
               $id_admin_dinasi=null;
             }
             $data = array(
-		'username' => $this->input->post('username',TRUE),
+		'username' => $this->input->post('email',TRUE),
 		'nama' => $this->input->post('nama',TRUE),
 		'email' => $this->input->post('email',TRUE),
 		'alamat' => $this->input->post('alamat',TRUE),
@@ -133,7 +133,7 @@ class Pemilik_wisata extends MY_Controller
 	    );
           }
 
-        
+
 
 
             $this->MPemilik_wisata->update($this->input->post('id', TRUE), $data);
@@ -181,7 +181,6 @@ class Pemilik_wisata extends MY_Controller
 
     public function _rules()
     {
-	$this->form_validation->set_rules('username', 'username', 'trim|required');
 	$this->form_validation->set_rules('nama', 'nama', 'trim|required');
 	$this->form_validation->set_rules('email', 'email', 'trim|required');
 	$this->form_validation->set_rules('alamat', 'alamat', 'trim|required');

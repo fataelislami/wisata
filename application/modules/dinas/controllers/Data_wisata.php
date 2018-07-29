@@ -19,13 +19,13 @@ class Data_wisata extends MY_Controller
       $datafield=$this->Data_wisata_model->get_field();//panggil ke modell
 
       $data = array(
-        'contain_view' => 'admin/data_wisata/data_wisata_list',
-        'sidebar'=>'admin/sidebar',
-        'css'=>'admin/data_wisata/assets/css',
-        'script'=>'admin/data_wisata/assets/script',
+        'contain_view' => 'dinas/data_wisata/data_wisata_list',
+        'sidebar'=>'dinas/sidebar',
+        'css'=>'dinas/crudassets/css',
+        'script'=>'dinas/crudassets/script',
         'datadata_wisata'=>$datadata_wisata,
         'datafield'=>$datafield,
-        'module'=>'admin'
+        'module'=>'dinas'
        );
       $this->template->load($data);
     }
@@ -33,11 +33,11 @@ class Data_wisata extends MY_Controller
 
     public function create(){
       $data = array(
-        'contain_view' => 'admin/data_wisata/data_wisata_form',
-        'sidebar'=>'admin/sidebar',//Ini buat menu yang ditampilkan di module admin {DIKIRIM KE TEMPLATE}
-        'css'=>'admin/data_wisata/assets/css',//Ini buat kirim css dari page nya  {DIKIRIM KE TEMPLATE}
-        'script'=>'admin/data_wisata/assets/script',//ini buat javascript apa aja yang di load di page {DIKIRIM KE TEMPLATE}
-        'action'=>'admin/data_wisata/create_action'
+        'contain_view' => 'dinas/data_wisata/data_wisata_form',
+        'sidebar'=>'dinas/sidebar',//Ini buat menu yang ditampilkan di module admin {DIKIRIM KE TEMPLATE}
+        'css'=>'dinas/data_wisata/assets/css',//Ini buat kirim css dari page nya  {DIKIRIM KE TEMPLATE}
+        'script'=>'dinas/data_wisata/assets/script',//ini buat javascript apa aja yang di load di page {DIKIRIM KE TEMPLATE}
+        'action'=>'dinas/data_wisata/create_action'
        );
       $this->template->load($data);
     }
@@ -45,11 +45,11 @@ class Data_wisata extends MY_Controller
     public function edit($id){
       $dataedit=$this->Data_wisata_model->get_by_id($id);
       $data = array(
-        'contain_view' => 'admin/data_wisata/data_wisata_edit',
-        'sidebar'=>'admin/sidebar',//Ini buat menu yang ditampilkan di module admin {DIKIRIM KE TEMPLATE}
-        'css'=>'admin/crudassets/css',//Ini buat kirim css dari page nya  {DIKIRIM KE TEMPLATE}
-        'script'=>'admin/crudassets/script',//ini buat javascript apa aja yang di load di page {DIKIRIM KE TEMPLATE}
-        'action'=>'admin/data_wisata/update_action',
+        'contain_view' => 'dinas/data_wisata/data_wisata_edit',
+        'sidebar'=>'dinas/sidebar',//Ini buat menu yang ditampilkan di module admin {DIKIRIM KE TEMPLATE}
+        'css'=>'dinas/crudassets/css',//Ini buat kirim css dari page nya  {DIKIRIM KE TEMPLATE}
+        'script'=>'dinas/crudassets/script',//ini buat javascript apa aja yang di load di page {DIKIRIM KE TEMPLATE}
+        'action'=>'dinas/data_wisata/update_action',
         'dataedit'=>$dataedit
        );
       $this->template->load($data);
@@ -83,7 +83,7 @@ class Data_wisata extends MY_Controller
 
             $this->Data_wisata_model->insert($data);
             $this->session->set_flashdata('message', 'Create Record Success');
-            redirect(site_url('admin/data_wisata'));
+            redirect(site_url('dinas/data_wisata'));
         }
     }
 
@@ -116,7 +116,7 @@ class Data_wisata extends MY_Controller
 
             $this->Data_wisata_model->update($this->input->post('id', TRUE), $data);
             $this->session->set_flashdata('message', 'Update Record Success');
-            redirect(site_url('admin/data_wisata'));
+            redirect(site_url('dinas/data_wisata'));
         }
     }
 
@@ -127,10 +127,10 @@ class Data_wisata extends MY_Controller
         if ($row) {
             $this->Data_wisata_model->delete($id);
             $this->session->set_flashdata('message', 'Delete Record Success');
-            redirect(site_url('admin/data_wisata'));
+            redirect(site_url('dinas/data_wisata'));
         } else {
             $this->session->set_flashdata('message', 'Record Not Found');
-            redirect(site_url('admin/data_wisata'));
+            redirect(site_url('dinas/data_wisata'));
         }
     }
 

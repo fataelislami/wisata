@@ -8,10 +8,10 @@
                     <label>id</label>
                     <input type="text" name="id" class="form-control" placeholder="" value="<?php echo $dataedit->id?>" readonly>
             </div>
-	  <div class="form-group">
-            <label>username</label>
-            <input type="text" name="username" class="form-control" value="<?php echo $dataedit->username?>">
-    </div>
+            <div class="form-group">
+                    <label>email</label>
+                    <input type="text" name="email" class="form-control" value="<?php echo $dataedit->email?>">
+            </div>
 	  <div class="form-group">
             <label>password</label>
             <input type="text" name="password" class="form-control" placeholder="masukan password baru">
@@ -19,10 +19,6 @@
 	  <div class="form-group">
             <label>nama</label>
             <input type="text" name="nama" class="form-control" value="<?php echo $dataedit->nama?>">
-    </div>
-	  <div class="form-group">
-            <label>email</label>
-            <input type="text" name="email" class="form-control" value="<?php echo $dataedit->email?>">
     </div>
 	  <div class="form-group">
             <label>alamat</label>
