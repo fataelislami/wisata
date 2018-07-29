@@ -6,6 +6,9 @@
                   <div class="col-md-6">
                       <h4 class="card-title">Data Kecamatan</h4>
                       <h6 class="card-subtitle">Export data to Copy, CSV, Excel, PDF & Print</h6>
+                      <div class="col-md-6 text-right">
+                          <?php echo anchor(site_url($module.'/kecamatan/export'), '+ Export Excel', 'class="btn btn-success"'); ?>
+          	          </div>
                   </div>
                   <div class="col-md-6 text-right">
                       <?php echo anchor(site_url($module.'/kecamatan/create'), '+ Tambah Data', 'class="btn btn-primary"'); ?>
