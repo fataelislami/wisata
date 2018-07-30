@@ -20,6 +20,7 @@ class Register extends MY_Controller{
   }
   function action(){
     $ktp=$this->input->post('no_ktp',TRUE);
+    $foto=$this->upload_foto('file_ktp');
     $data = array(
 'username' => $this->input->post('email',TRUE),
 'password' => md5($this->input->post('password',TRUE)),
@@ -29,7 +30,7 @@ class Register extends MY_Controller{
 'jenis_kelamin' => $this->input->post('jenis_kelamin',TRUE),
 'tanggal_lahir' => $this->input->post('tanggal_lahir',TRUE),
 'no_ktp' => $this->input->post('no_ktp',TRUE),
-'file_ktp' => $this->input->post('file_ktp',TRUE),
+'file_ktp' => $foto['file_name'],
 );
 
       $where = array('email' => $this->input->post('email',TRUE) );
@@ -78,6 +79,23 @@ class Register extends MY_Controller{
   $this->email->message($isi);
   $this->email->set_mailtype('html');
   $this->email->send();
+}
+
+public function upload_foto($formname){
+$config['upload_path']          = './upload_area/pemilik_wisata';
+$config['allowed_types']        = 'gif|jpg|png|jpeg';
+$config['encrypt_name'] = TRUE;
+//$config['max_size']             = 100;
+//$config['max_width']            = 1024;
+//$config['max_height']           = 768;
+$this->load->library('upload', $config);
+$this->upload->do_upload($formname);
+return $this->upload->data();
+
+//Cara pemakaian
+//hidupkan object terlebih dahulu
+//misal
+//$foto=$this->upload_foto();
 }
 
 

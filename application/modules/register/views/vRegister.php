@@ -42,7 +42,7 @@ echo "<script>alert('$errorMessage')</script>";
     <section id="wrapper" class="login-register login-sidebar"  style="background-image:url(assets/images/background/bglogin.jpg);">
   <div class="login-box card">
     <div class="card-body">
-      <form class="form-horizontal form-material" method="post" id="loginform" action="register/action">
+      <form class="form-horizontal form-material" method="post" id="loginform" action="register/action" enctype="multipart/form-data">
         <div class="form-group m-t-40">
           <div class="col-xs-12">
             <input class="form-control" type="text" name="nama" required="" placeholder="Nama">
