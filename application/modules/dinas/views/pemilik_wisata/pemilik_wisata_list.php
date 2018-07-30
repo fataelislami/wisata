@@ -17,18 +17,22 @@
                     <table id="example23" class="display nowrap table table-hover table-striped table-bordered" cellspacing="0" width="100%">
                         <thead>
                             <tr>
-                                <?php foreach ($datafield as $d): ?>
-                                  <th><?php echo str_replace("_"," ",$d) ?></th>
-                                <?php endforeach; ?>
+                                <th>id</th>
+                                <th>nama</th>
+                                <th>email</th>
+                                <th>no ktp</th>
+                                <th>alamat</th>
                                 <th>aksi</th>
                             </tr>
                         </thead>
                         <tbody>
                           <?php foreach ($datapemilik_wisata as $d): ?>
                             <tr>
-                              <?php foreach ($datafield as $df): ?>
-                                <td><?php echo $d->$df ?></td>
-                              <?php endforeach; ?>
+                                <td><?php echo $d->id ?></td>
+                                <td><?php echo $d->nama ?></td>
+                                <td><?php echo $d->email ?></td>
+                                <td><?php echo $d->no_ktp ?></td>
+                                <td><?php echo $d->alamat ?></td>
                                 <td>
                                 <a href="<?php echo base_url().$module?>/pemilik_wisata/edit/<?php echo $d->id ?>">
                                         <button class="btn btn-success waves-effect waves-light m-r-10">Edit</button>

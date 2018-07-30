@@ -113,7 +113,7 @@ class Pemilik_wisata extends MY_Controller
         		'status' => $this->input->post('status',TRUE),
             'id_admin_dinas' => $id_admin_dinasi,//mengambil id admin dinas dari session ketika login
         	    );
-              if(sizeof($_FILES['file_ktp']['name'])!=0){
+              if($_FILES['file_ktp']['name']!=''){//pengecekan
                 $foto=$this->upload_foto('file_ktp');
                 $data['file_ktp']=$foto['file_name'];
               }
@@ -137,7 +137,7 @@ class Pemilik_wisata extends MY_Controller
 		'status' => $this->input->post('status',TRUE),
     'id_admin_dinas' => $id_admin_dinasi,//mengambil id admin dinas dari session ketika login
 	    );
-      if(sizeof($_FILES['file_ktp']['name'])!=0){
+      if($_FILES['file_ktp']['name']!=''){
         $foto=$this->upload_foto('file_ktp');
         $data['file_ktp']=$foto['file_name'];
       }
