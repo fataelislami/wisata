@@ -93,6 +93,8 @@ class Data_wisata extends MY_Controller
 		'no_telp' => $this->input->post('no_telp',TRUE),
 		'htm_dewasa' => $this->input->post('htm_dewasa',TRUE),
 		'htm_anak' => $this->input->post('htm_anak',TRUE),
+    'status' => $this->input->post('status',TRUE),
+
 	    );
       var_dump($data);
         } else {
@@ -111,6 +113,7 @@ class Data_wisata extends MY_Controller
   'no_telp' => $this->input->post('no_telp',TRUE),
   'htm_dewasa' => $this->input->post('htm_dewasa',TRUE),
   'htm_anak' => $this->input->post('htm_anak',TRUE),
+  'status' => $this->input->post('status',TRUE),
     );
 
             $sql=$this->Dbs->insert($data,'data_wisata');
@@ -132,7 +135,9 @@ class Data_wisata extends MY_Controller
                   'url'=>$foto['file_name'],
                   'id_wisata'=>$id_wisata
                 );
-                $this->Dbs->insert($dataFoto,'gambar');
+                if($_FILES['gambar']['name'][0]!=''){//pengecekan
+                  $this->Dbs->insert($dataFoto,'gambar');
+                }
               }
             }
 
@@ -166,6 +171,8 @@ class Data_wisata extends MY_Controller
 		'no_telp' => $this->input->post('no_telp',TRUE),
 		'htm_dewasa' => $this->input->post('htm_dewasa',TRUE),
 		'htm_anak' => $this->input->post('htm_anak',TRUE),
+    'status' => $this->input->post('status',TRUE),
+
 	    );
 
             $this->Data_wisata_model->update($this->input->post('id', TRUE), $data);
@@ -184,7 +191,9 @@ class Data_wisata extends MY_Controller
                   'url'=>$foto['file_name'],
                   'id_wisata'=>$id_wisata
                 );
-                $this->Dbs->insert($dataFoto,'gambar');
+                if($_FILES['gambar']['name'][0]!=''){//pengecekan
+                  $this->Dbs->insert($dataFoto,'gambar');
+                }
               }
             }
 

@@ -33,23 +33,29 @@ class Data_wisata extends MY_Controller
 
 
     public function create(){
-      $polygon1=$this->Dbs->getwhere('id_polygon',1,'polygon')->row()->coordinate;
-      $polygon2=$this->Dbs->getwhere('id_polygon',2,'polygon')->row()->coordinate;
-      $polygon3=$this->Dbs->getwhere('id_polygon',3,'polygon')->row()->coordinate;
-      $polygon4=$this->Dbs->getwhere('id_polygon',4,'polygon')->row()->coordinate;
+      if($this->session->userdata('create')!=0){
+        $polygon1=$this->Dbs->getwhere('id_polygon',1,'polygon')->row()->coordinate;
+        $polygon2=$this->Dbs->getwhere('id_polygon',2,'polygon')->row()->coordinate;
+        $polygon3=$this->Dbs->getwhere('id_polygon',3,'polygon')->row()->coordinate;
+        $polygon4=$this->Dbs->getwhere('id_polygon',4,'polygon')->row()->coordinate;
 
-      $data = array(
-        'contain_view' => 'pemilik_wisata/data_wisata/data_wisata_form',
-        'sidebar'=>'pemilik_wisata/sidebar',//Ini buat menu yang ditampilkan di module admin {DIKIRIM KE TEMPLATE}
-        'css'=>'pemilik_wisata/data_wisata/assets/css',//Ini buat kirim css dari page nya  {DIKIRIM KE TEMPLATE}
-        'script'=>'pemilik_wisata/data_wisata/assets/script',//ini buat javascript apa aja yang di load di page {DIKIRIM KE TEMPLATE}
-        'action'=>'pemilik_wisata/data_wisata/create_action',
-        'polygon1'=>$polygon1,
-        'polygon2'=>$polygon2,
-        'polygon3'=>$polygon3,
-        'polygon4'=>$polygon4,
-       );
-      $this->template->load($data);
+        $data = array(
+          'contain_view' => 'pemilik_wisata/data_wisata/data_wisata_form',
+          'sidebar'=>'pemilik_wisata/sidebar',//Ini buat menu yang ditampilkan di module admin {DIKIRIM KE TEMPLATE}
+          'css'=>'pemilik_wisata/data_wisata/assets/css',//Ini buat kirim css dari page nya  {DIKIRIM KE TEMPLATE}
+          'script'=>'pemilik_wisata/data_wisata/assets/script',//ini buat javascript apa aja yang di load di page {DIKIRIM KE TEMPLATE}
+          'action'=>'pemilik_wisata/data_wisata/create_action',
+          'polygon1'=>$polygon1,
+          'polygon2'=>$polygon2,
+          'polygon3'=>$polygon3,
+          'polygon4'=>$polygon4,
+         );
+        $this->template->load($data);
+      }else{
+        $this->session->set_flashdata('message', 'Akses Ditolak! Anda Belum Di Aktivasi oleh admin dinas');
+        redirect(site_url('pemilik_wisata'));
+      }
+
     }
 
 //COPY INI KALO MAU MULTIPLE UPLOAD

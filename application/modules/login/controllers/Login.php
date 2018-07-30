@@ -69,14 +69,20 @@ class Login extends MY_Controller{
         $name=$getdatauser[0]->nama;
         $level=$getdatauser[0]->level;
         $id_user=$getdatauser[0]->id;
-
+        $id_admin_dinas=$getdatauser[0]->id_admin_dinas;
+        if($id_admin_dinas!=null){
+          $create=1;
+        }else{
+          $create=0;
+        }
   			$data_session = array(//Data yang akan disimpan kedalam session
   				'username' => $username,
           'name'=>$name,
   				'status' => "login",
           'role'=> 3,
           'level'=>$level,
-          'id'=>$id_user
+          'id'=>$id_user,
+          'create'=>$create
   				);
 
   			$this->session->set_userdata($data_session);

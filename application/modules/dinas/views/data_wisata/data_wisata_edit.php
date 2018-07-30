@@ -65,8 +65,15 @@
             <label>htm_anak</label>
             <input type="text" name="htm_anak" class="form-control" value="<?php echo $dataedit->htm_anak?>">
     </div>
+    <div class="form-group">
+            <label>Status</label>
+            <select class="form-control" name="status">
+              <option value="aktif" <?php if($dataedit->status=='aktif'){echo "selected";} ?>>aktif</option>
+              <option value="pending" <?php  if($dataedit->status=='pending'){echo "selected";} ?>>pending</option>
+            </select>
+    </div>
     <div id="getGambar">
-      
+
     </div>
     <div class="form-group">
             <label>Gambar</label>

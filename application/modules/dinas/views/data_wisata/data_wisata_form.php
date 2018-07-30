@@ -102,6 +102,13 @@
             <input type="text" name="htm_anak" class="form-control" placeholder="">
     </div>
     <div class="form-group">
+            <label>Status</label>
+            <select class="form-control" name="status">
+              <option value="aktif">aktif</option>
+              <option value="pending">pending</option>
+            </select>
+    </div>
+    <div class="form-group">
             <label>Gambar</label>
             <input type="file" name="gambar[]" multiple>
     </div>

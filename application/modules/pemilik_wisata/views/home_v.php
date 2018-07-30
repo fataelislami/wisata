@@ -1,3 +1,7 @@
+<?php if($this->session->flashdata('message')) {
+  $flashMessage=$this->session->flashdata('message');
+echo "<script>alert('$flashMessage')</script>";
+ } ?>
 <!-- ============================================================== -->
 <!-- Start Page Content -->
 <!-- ============================================================== -->
