@@ -22,6 +22,13 @@ class Data_wisata_model extends CI_Model
         return $this->db->get($this->table)->result();
     }
 
+    function get_by_kota($id_kota)
+    {
+        $this->db->where('id_kota', $id_kota);
+        $this->db->where('safe_delete!=', 1);
+        return $this->db->get($this->table)->result();
+    }
+
     //get field
     function get_field(){
       return $this->db->list_fields($this->table);
@@ -97,6 +104,12 @@ class Data_wisata_model extends CI_Model
     {
         $this->db->where($this->id, $id);
         $this->db->delete($this->table);
+    }
+
+    function safe_delete($id, $data)
+    {
+        $this->db->where($this->id, $id);
+        $this->db->update($this->table, $data);
     }
 
 }

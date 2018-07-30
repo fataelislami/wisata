@@ -16,7 +16,7 @@ class Data_wisata extends MY_Controller
     public function index()
     {
 
-      $datadata_wisata=$this->Data_wisata_model->get_all();//panggil ke modell
+      $datadata_wisata=$this->Data_wisata_model->get_by_id_user($this->session->userdata('id_user'));//panggil ke modell
       $datafield=$this->Data_wisata_model->get_field();//panggil ke modell
 
       $data = array(
@@ -132,7 +132,7 @@ class Data_wisata extends MY_Controller
 		'id_kota' => $this->input->post('id_kota',TRUE),
 		'id_kecamatan' => $this->input->post('id_kecamatan',TRUE),
 		'id_kelurahan' => $this->input->post('id_kelurahan',TRUE),
-		'id_user' => $this->session->userdata('id'),
+		'id_user' => $this->session->userdata('id_user'),
 		'no_telp' => $this->input->post('no_telp',TRUE),
 		'htm_dewasa' => $this->input->post('htm_dewasa',TRUE),
 		'htm_anak' => $this->input->post('htm_anak',TRUE),
@@ -155,7 +155,9 @@ class Data_wisata extends MY_Controller
                       'url'=>$foto['file_name'],
                       'id_wisata'=>$id_wisata
                     );
-                    $this->Dbs->insert($dataFoto,'gambar');
+                    if($_FILES['gambar']['name'][0]!=''){//pengecekan
+                      $this->Dbs->insert($dataFoto,'gambar');
+                    }
                   }
                 }
               }            //MULTIPLE UPLOAD START
@@ -188,7 +190,7 @@ class Data_wisata extends MY_Controller
 		'id_kota' => $this->input->post('id_kota',TRUE),
 		'id_kecamatan' => $this->input->post('id_kecamatan',TRUE),
 		'id_kelurahan' => $this->input->post('id_kelurahan',TRUE),
-		'id_user' => $this->session->userdata('id'),
+		'id_user' => $this->session->userdata('id_user'),
 		'no_telp' => $this->input->post('no_telp',TRUE),
 		'htm_dewasa' => $this->input->post('htm_dewasa',TRUE),
 		'htm_anak' => $this->input->post('htm_anak',TRUE),
@@ -210,7 +212,9 @@ class Data_wisata extends MY_Controller
                   'url'=>$foto['file_name'],
                   'id_wisata'=>$id_wisata
                 );
-                $this->Dbs->insert($dataFoto,'gambar');
+                if($_FILES['gambar']['name'][0]!=''){//pengecekan
+                  $this->Dbs->insert($dataFoto,'gambar');
+                }
               }
             }
 
@@ -232,6 +236,19 @@ class Data_wisata extends MY_Controller
             $this->session->set_flashdata('message', 'Record Not Found');
             redirect(site_url('pemilik_wisata/data_wisata'));
         }
+    }
+
+    public function safe_delete($id){
+      $row = $this->Data_wisata_model->get_by_id($id);
+      if ($row) {
+        $data=array('safe_delete'=>1);
+          $this->Data_wisata_model->safe_delete($id,$data);
+          $this->session->set_flashdata('message', 'Delete Record Success');
+          redirect(site_url('dinas/data_wisata'));
+      } else {
+          $this->session->set_flashdata('message', 'Record Not Found');
+          redirect(site_url('dinas/data_wisata'));
+      }
     }
 
     public function _rules()

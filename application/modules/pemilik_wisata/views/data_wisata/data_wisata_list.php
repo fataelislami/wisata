@@ -35,7 +35,7 @@
                                 <a href="<?php echo base_url().$module?>/data_wisata/edit/<?php echo $d->id ?>">
                                         <button class="btn btn-success waves-effect waves-light m-r-10">Edit</button>
                                     </a>
-                                    <a href="<?php echo base_url().$module?>/data_wisata/delete/<?php echo $d->id ?>">
+                                    <a href="<?php echo base_url().$module?>/data_wisata/safe_delete/<?php echo $d->id ?>">
                                       <button class="btn btn-danger waves-effect waves-light m-r-10" >Delete</button>
                                     </a>
                                 </td>

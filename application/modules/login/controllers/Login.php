@@ -55,7 +55,8 @@ class Login extends MY_Controller{
         'role'=> 2,
         'level'=>$level,
         'id'=>$id_admin_dinas,
-        'id_kota'=>$id_kota
+        'id_kota'=>$id_kota,
+        'id_user'=>$level.'_'.$id_admin_dinas
 				);
 
 			$this->session->set_userdata($data_session);
@@ -82,7 +83,8 @@ class Login extends MY_Controller{
           'role'=> 3,
           'level'=>$level,
           'id'=>$id_user,
-          'create'=>$create
+          'create'=>$create,
+          'id_user'=>$level.'_'.$id_user
   				);
 
   			$this->session->set_userdata($data_session);

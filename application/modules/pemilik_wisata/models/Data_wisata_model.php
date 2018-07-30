@@ -34,6 +34,13 @@ class Data_wisata_model extends CI_Model
         return $this->db->get($this->table)->row();
     }
 
+    function get_by_id_user($id_user)
+    {
+        $this->db->where('id_user', $id_user);
+        $this->db->where('safe_delete!=', 1);
+        return $this->db->get($this->table)->result();
+    }
+
     // get total rows
     function total_rows($q = NULL) {
         $this->db->like('id', $q);
@@ -97,6 +104,12 @@ class Data_wisata_model extends CI_Model
     {
         $this->db->where($this->id, $id);
         $this->db->delete($this->table);
+    }
+
+    function safe_delete($id, $data)
+    {
+        $this->db->where($this->id, $id);
+        $this->db->update($this->table, $data);
     }
 
 }
