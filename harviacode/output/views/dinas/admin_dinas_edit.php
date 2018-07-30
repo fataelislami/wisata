@@ -40,6 +40,10 @@
             <label>level</label>
             <input type="text" name="level" class="form-control" value="<?php echo $dataedit->level?>">
     </div>
+	  <div class="form-group">
+            <label>id_superadmin</label>
+            <input type="text" name="id_superadmin" class="form-control" value="<?php echo $dataedit->id_superadmin?>">
+    </div>
 	
                 <div class="form-group">
                   <button type="submit" class="btn btn-success waves-effect waves-light m-r-10">Submit</button>

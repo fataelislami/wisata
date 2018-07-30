@@ -9,6 +9,7 @@ class Data_wisata extends MY_Controller
     {
         parent::__construct();
         $this->load->model('Data_wisata_model');
+        $this->load->model(array('Dbs'));
         $this->load->library('form_validation');
     }
 
@@ -32,15 +33,58 @@ class Data_wisata extends MY_Controller
 
 
     public function create(){
+      $polygon1=$this->Dbs->getwhere('id_polygon',1,'polygon')->row()->coordinate;
+      $polygon2=$this->Dbs->getwhere('id_polygon',2,'polygon')->row()->coordinate;
+      $polygon3=$this->Dbs->getwhere('id_polygon',3,'polygon')->row()->coordinate;
+      $polygon4=$this->Dbs->getwhere('id_polygon',4,'polygon')->row()->coordinate;
+
       $data = array(
         'contain_view' => 'pemilik_wisata/data_wisata/data_wisata_form',
         'sidebar'=>'pemilik_wisata/sidebar',//Ini buat menu yang ditampilkan di module admin {DIKIRIM KE TEMPLATE}
         'css'=>'pemilik_wisata/data_wisata/assets/css',//Ini buat kirim css dari page nya  {DIKIRIM KE TEMPLATE}
         'script'=>'pemilik_wisata/data_wisata/assets/script',//ini buat javascript apa aja yang di load di page {DIKIRIM KE TEMPLATE}
-        'action'=>'pemilik_wisata/data_wisata/create_action'
+        'action'=>'pemilik_wisata/data_wisata/create_action',
+        'polygon1'=>$polygon1,
+        'polygon2'=>$polygon2,
+        'polygon3'=>$polygon3,
+        'polygon4'=>$polygon4,
        );
       $this->template->load($data);
     }
+
+//COPY INI KALO MAU MULTIPLE UPLOAD
+    public function getupload()
+    {
+      $id_wisata=$this->Dbs->id_wisata()->id;
+      echo $id_wisata+1;
+      $limitLoop=sizeof($_FILES['gambar']['name']);
+      for ($i=0; $i <$limitLoop ; $i++) {
+        $_FILES['file']['name']     = $_FILES['gambar']['name'][$i];
+        $_FILES['file']['type']     = $_FILES['gambar']['type'][$i];
+        $_FILES['file']['tmp_name'] = $_FILES['gambar']['tmp_name'][$i];
+        $_FILES['file']['error']     = $_FILES['gambar']['error'][$i];
+        $_FILES['file']['size']     = $_FILES['gambar']['size'][$i];
+        $foto=$this->upload_foto('file');
+        echo $foto['file_name'];
+      }
+    }
+    //COPY INI KALO MAU MULTIPLE UPLOAD
+
+
+    public function upload_foto($formname){
+    $config['upload_path']          = './upload_area/gambar_wisata';
+    $config['allowed_types']        = 'gif|jpg|png|jpeg';
+    $config['encrypt_name'] = FALSE;
+    //$config['max_size']             = 100;
+    //$config['max_width']            = 1024;
+    //$config['max_height']           = 768;
+    $this->load->library('upload', $config);
+    $this->upload->do_upload($formname);
+    return $this->upload->data();
+
+    }
+
+
 
     public function edit($id){
       $dataedit=$this->Data_wisata_model->get_by_id($id);
@@ -80,7 +124,31 @@ class Data_wisata extends MY_Controller
 		'htm_anak' => $this->input->post('htm_anak',TRUE),
 	    );
 
-            $this->Data_wisata_model->insert($data);
+
+              $sql=$this->Dbs->insert($data,'data_wisata');
+              if($sql){
+                $id_wisata=$this->Dbs->id_wisata()->id;
+                $limitLoop=sizeof($_FILES['gambar']['name']);
+                if($limitLoop!=0){
+                  for ($i=0; $i <$limitLoop ; $i++) {
+                    $_FILES['file']['name']     = $_FILES['gambar']['name'][$i];
+                    $_FILES['file']['type']     = $_FILES['gambar']['type'][$i];
+                    $_FILES['file']['tmp_name'] = $_FILES['gambar']['tmp_name'][$i];
+                    $_FILES['file']['error']     = $_FILES['gambar']['error'][$i];
+                    $_FILES['file']['size']     = $_FILES['gambar']['size'][$i];
+                    $foto=$this->upload_foto('file');
+                    $dataFoto=array(
+                      'url'=>$foto['file_name'],
+                      'id_wisata'=>$id_wisata
+                    );
+                    $this->Dbs->insert($dataFoto,'gambar');
+                  }
+                }
+              }            //MULTIPLE UPLOAD START
+
+
+            //MULTIPLE UPLOAD END
+
             $this->session->set_flashdata('message', 'Create Record Success');
             redirect(site_url('pemilik_wisata/data_wisata'));
         }

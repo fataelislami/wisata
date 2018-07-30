@@ -92,10 +92,23 @@ $this->load->library('upload', $config);
 $this->upload->do_upload($formname);
 return $this->upload->data();
 
-//Cara pemakaian
+//Cara pemakaian untuk single
 //hidupkan object terlebih dahulu
 //misal
-//$foto=$this->upload_foto();
+//$foto=$this->upload_foto('gambar');
+//ambil $namafoto=$foto['file_name'];
+
+//Cara pemakaian untuk multiple
+// $limitLoop=sizeof($_FILES['gambar']['name']);
+// for ($i=0; $i <$limitLoop ; $i++) {
+//   $_FILES['file']['name']     = $_FILES['gambar']['name'][$i];
+//   $_FILES['file']['type']     = $_FILES['gambar']['type'][$i];
+//   $_FILES['file']['tmp_name'] = $_FILES['gambar']['tmp_name'][$i];
+//   $_FILES['file']['error']     = $_FILES['gambar']['error'][$i];
+//   $_FILES['file']['size']     = $_FILES['gambar']['size'][$i];
+//   $foto=$this->upload_foto('file');
+//   echo $foto['file_name'];
+// }
 }
 
 

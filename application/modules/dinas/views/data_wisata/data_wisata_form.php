@@ -34,7 +34,7 @@
     <div class="card">
         <div class="card-body">
             <h4 class="card-title">Tambah Data_wisata</h4>
-            <form class="form-material m-t-40" method="post" action="<?php echo base_url().$action ?>">
+            <form class="form-material m-t-40" method="post" action="<?php echo base_url().$action ?>" enctype="multipart/form-data">
 	  <div class="form-group">
             <label>nama</label>
             <input type="text" name="nama" class="form-control" placeholder="">
@@ -73,16 +73,21 @@
             <input type="text" name="peta_marker" class="form-control" placeholder="">
     </div>
 	  <div class="form-group">
-            <label>id_kota</label>
-            <input type="text" name="id_kota" class="form-control" placeholder="">
+            <label>Kota</label>
+            <select class="form-control" id="kota" name="id_kota">
+            </select>
     </div>
 	  <div class="form-group">
-            <label>id_kecamatan</label>
-            <input type="text" name="id_kecamatan" class="form-control" placeholder="">
+            <label>Kecamatan</label>
+            <select class="form-control" id="kecamatan" name="id_kecamatan">
+              <option value="null">Pilih Kecamatan</option>
+            </select>
     </div>
-	  <div class="form-group">
-            <label>id_kelurahan</label>
-            <input type="text" name="id_kelurahan" class="form-control" placeholder="">
+    <div class="form-group">
+            <label>Kelurahan</label>
+            <select class="form-control" id="kelurahan" name="id_kelurahan">
+              <option value="null">Pilih Kelurahan</option>
+            </select>
     </div>
 	  <div class="form-group">
             <label>no_telp</label>
@@ -95,6 +100,10 @@
 	  <div class="form-group">
             <label>htm_anak</label>
             <input type="text" name="htm_anak" class="form-control" placeholder="">
+    </div>
+    <div class="form-group">
+            <label>Gambar</label>
+            <input type="file" name="gambar[]" multiple>
     </div>
 	    <input type="hidden" name="id" />
 

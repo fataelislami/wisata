@@ -1,9 +1,8 @@
 <link href="<?php echo base_url()?>assets/plugins/summernote/dist/summernote.css" rel="stylesheet" />
-  <link href="<?php echo base_url()?>assets/plugins/sweetalert/sweetalert.css" rel="stylesheet" type="text/css">
-  <link href="css/bootstrap.min.css" rel="stylesheet">
+<link href="<?php echo base_url()?>assets/plugins/sweetalert/sweetalert.css" rel="stylesheet" type="text/css">
         <!-- <script type="text/javascript" src="js/jquery-1.10.2.min.js"></script> -->
 
-        
+
   <style>
 
 #myImg {

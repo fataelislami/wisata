@@ -8,15 +8,15 @@ class Dinas extends MY_Controller
     function __construct()
     {
         parent::__construct();
-        $this->load->model('MDinas');
+        $this->load->model('Admin_dinas_model');
         $this->load->library('form_validation');
     }
 
     public function index()
     {
 
-      $datadinas=$this->MDinas->get_all();//panggil ke modell
-      $datafield=$this->MDinas->get_field();//panggil ke modell
+      $datadinas=$this->Admin_dinas_model->get_all();//panggil ke modell
+      $datafield=$this->Admin_dinas_model->get_field();//panggil ke modell
 
       $data = array(
         'contain_view' => 'admin/dinas/admin_dinas_list',
@@ -43,7 +43,7 @@ class Dinas extends MY_Controller
     }
 
     public function edit($id){
-      $dataedit=$this->MDinas->get_by_id($id);
+      $dataedit=$this->Admin_dinas_model->get_by_id($id);
       $data = array(
         'contain_view' => 'admin/dinas/admin_dinas_edit',
         'sidebar'=>'admin/sidebar',//Ini buat menu yang ditampilkan di module admin {DIKIRIM KE TEMPLATE}
@@ -72,9 +72,10 @@ class Dinas extends MY_Controller
 		'foto' => $this->input->post('foto',TRUE),
 		'status' => $this->input->post('status',TRUE),
 		'level' => $this->input->post('level',TRUE),
+		'id_superadmin' => $this->session->userdata('id'),
 	    );
 
-            $this->MDinas->insert($data);
+            $this->Admin_dinas_model->insert($data);
             $this->session->set_flashdata('message', 'Create Record Success');
             redirect(site_url('admin/dinas'));
         }
@@ -89,18 +90,33 @@ class Dinas extends MY_Controller
         if ($this->form_validation->run() == FALSE) {
             $this->edit($this->input->post('id', TRUE));
         } else {
+          if($_POST['password']!=''){
             $data = array(
-		'username' => $this->input->post('username',TRUE),
-		'password' => md5($this->input->post('password',TRUE)),
-		'nama' => $this->input->post('nama',TRUE),
-		'email' => $this->input->post('email',TRUE),
-		'kota' => $this->input->post('kota',TRUE),
-		'foto' => $this->input->post('foto',TRUE),
-		'status' => $this->input->post('status',TRUE),
-		'level' => $this->input->post('level',TRUE),
-	    );
+            'username' => $this->input->post('username',TRUE),
+            'password' => md5($this->input->post('password',TRUE)),
+            'nama' => $this->input->post('nama',TRUE),
+            'email' => $this->input->post('email',TRUE),
+            'kota' => $this->input->post('kota',TRUE),
+            'foto' => $this->input->post('foto',TRUE),
+            'status' => $this->input->post('status',TRUE),
+            'level' => $this->input->post('level',TRUE),
+            'id_superadmin' => $this->session->userdata('id'),
+            );
+          }else {
+            $data = array(
+            'username' => $this->input->post('username',TRUE),
+            'nama' => $this->input->post('nama',TRUE),
+            'email' => $this->input->post('email',TRUE),
+            'kota' => $this->input->post('kota',TRUE),
+            'foto' => $this->input->post('foto',TRUE),
+            'status' => $this->input->post('status',TRUE),
+            'level' => $this->input->post('level',TRUE),
+            'id_superadmin' => $this->session->userdata('id'),
+            );
+          }
 
-            $this->MDinas->update($this->input->post('id', TRUE), $data);
+
+            $this->Admin_dinas_model->update($this->input->post('id', TRUE), $data);
             $this->session->set_flashdata('message', 'Update Record Success');
             redirect(site_url('admin/dinas'));
         }
@@ -108,10 +124,10 @@ class Dinas extends MY_Controller
 
     public function delete($id)
     {
-        $row = $this->MDinas->get_by_id($id);
+        $row = $this->Admin_dinas_model->get_by_id($id);
 
         if ($row) {
-            $this->MDinas->delete($id);
+            $this->Admin_dinas_model->delete($id);
             $this->session->set_flashdata('message', 'Delete Record Success');
             redirect(site_url('admin/dinas'));
         } else {
@@ -123,7 +139,6 @@ class Dinas extends MY_Controller
     public function _rules()
     {
 	$this->form_validation->set_rules('username', 'username', 'trim|required');
-	$this->form_validation->set_rules('password', 'password', 'trim|required');
 	$this->form_validation->set_rules('nama', 'nama', 'trim|required');
 	$this->form_validation->set_rules('email', 'email', 'trim|required');
 	$this->form_validation->set_rules('kota', 'kota', 'trim|required');

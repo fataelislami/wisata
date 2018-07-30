@@ -27,12 +27,14 @@ class Login extends MY_Controller{
       $getdatauser=$sql->result();
       $name=$getdatauser[0]->nama;
       $level=$getdatauser[0]->level;
+      $id_superadmin=$getdatauser[0]->id;
 			$data_session = array(//Data yang akan disimpan kedalam session
 				'username' => $username,
         'name'=>$name,
 				'status' => "login",
         'role'=> 1,
-        'level'=>$level
+        'level'=>$level,
+        'id'=>$id_superadmin
 				);
 
 			$this->session->set_userdata($data_session);

@@ -20,6 +20,12 @@ class Dbs extends CI_Model{
     return $db;
   }
 
+  function id_wisata(){
+    $this->db->order_by('id', 'DESC');
+    $db=$this->db->get('data_wisata')->row();
+    return $db;
+  }
+
 
   function insert($data,$table){
    $insert = $this->db->insert($table, $data);

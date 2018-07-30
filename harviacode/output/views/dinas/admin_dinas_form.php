@@ -36,6 +36,10 @@
             <label>level</label>
             <input type="text" name="level" class="form-control" placeholder="">
     </div>
+	  <div class="form-group">
+            <label>id_superadmin</label>
+            <input type="text" name="id_superadmin" class="form-control" placeholder="">
+    </div>
 	    <input type="hidden" name="id" /> 
 	
                 <div class="form-group">
