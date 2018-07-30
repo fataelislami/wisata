@@ -51,7 +51,7 @@ class Data_wisata extends MY_Controller
         'contain_view' => 'dinas/data_wisata/data_wisata_edit',
         'sidebar'=>'dinas/sidebar',//Ini buat menu yang ditampilkan di module admin {DIKIRIM KE TEMPLATE}
         'css'=>'dinas/crudassets/css',//Ini buat kirim css dari page nya  {DIKIRIM KE TEMPLATE}
-        'script'=>'dinas/crudassets/script',//ini buat javascript apa aja yang di load di page {DIKIRIM KE TEMPLATE}
+        'script'=>'dinas/data_wisata/assets/scriptEdit',//ini buat javascript apa aja yang di load di page {DIKIRIM KE TEMPLATE}
         'action'=>'dinas/data_wisata/update_action',
         'dataedit'=>$dataedit
        );

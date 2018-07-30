@@ -36,17 +36,22 @@
             <label>peta_marker</label>
             <input type="text" name="peta_marker" class="form-control" value="<?php echo $dataedit->peta_marker?>">
     </div>
-	  <div class="form-group">
-            <label>id_kota</label>
-            <input type="text" name="id_kota" class="form-control" value="<?php echo $dataedit->id_kota?>">
+    <div class="form-group">
+            <label>Kota</label>
+            <select class="form-control" id="kota" name="id_kota">
+            </select>
     </div>
-	  <div class="form-group">
-            <label>id_kecamatan</label>
-            <input type="text" name="id_kecamatan" class="form-control" value="<?php echo $dataedit->id_kecamatan?>">
+    <div class="form-group">
+            <label>Kecamatan</label>
+            <select class="form-control" id="kecamatan" name="id_kecamatan">
+              <option value="null">Pilih Kecamatan</option>
+            </select>
     </div>
-	  <div class="form-group">
-            <label>id_kelurahan</label>
-            <input type="text" name="id_kelurahan" class="form-control" value="<?php echo $dataedit->id_kelurahan?>">
+    <div class="form-group">
+            <label>Kelurahan</label>
+            <select class="form-control" id="kelurahan" name="id_kelurahan">
+              <option value="null">Pilih Kelurahan</option>
+            </select>
     </div>
 	  <div class="form-group">
             <label>no_telp</label>
@@ -60,6 +65,12 @@
             <label>htm_anak</label>
             <input type="text" name="htm_anak" class="form-control" value="<?php echo $dataedit->htm_anak?>">
     </div>
+
+
+<input type="hidden" id="getIdKota" value="<?php echo $dataedit->id_kota?>">
+<input type="hidden" id="getIdKecamatan" value="<?php echo $dataedit->id_kecamatan?>">
+<input type="hidden" id="getIdKelurahan" value="<?php echo $dataedit->id_kelurahan?>">
+
 
                 <div class="form-group">
                   <button type="submit" class="btn btn-success waves-effect waves-light m-r-10">Submit</button>

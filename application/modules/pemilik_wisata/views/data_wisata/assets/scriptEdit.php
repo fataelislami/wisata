@@ -295,6 +295,9 @@ $('#example23').DataTable({
 <script type="text/javascript">
   $(document).ready(function(){
     loadKota();
+    loadkecamatan($("#getIdKota").val());
+    loadkelurahan($("#getIdKecamatan").val());
+
 
     $("#kota").change(function(){
       var id_kota=$(this).val();
@@ -318,7 +321,11 @@ $('#example23').DataTable({
   $.ajax(settings).done(function (response) {
     items=JSON.parse(response);
     var akhir=items.length;
+    var selectedKelurahan=$("#getIdKelurahan").val();
     for(var i=0;i<akhir;i++){
+      if(items[i].id==selectedKelurahan){
+        $("#kelurahan").append('<option value="'+items[i].id+'" selected>'+items[i].nama+'</option>');
+      }
       $("#kelurahan").append('<option value="'+items[i].id+'">'+items[i].nama+'</option>');
       console.log(items[i].nama);
     }
@@ -332,10 +339,15 @@ $('#example23').DataTable({
   }
 
   $.ajax(settings).done(function (response) {
+    var selected=$("#getIdKecamatan").val();
     items=JSON.parse(response);
     var akhir=items.length;
     for(var i=0;i<akhir;i++){
-      $("#kecamatan").append('<option value="'+items[i].id+'">'+items[i].nama+'</option>');
+      if(selected==items[i].id){
+        $("#kecamatan").append('<option value="'+items[i].id+'" selected>'+items[i].nama+'</option>');
+      }else{
+        $("#kecamatan").append('<option value="'+items[i].id+'">'+items[i].nama+'</option>');
+      }
       console.log(items[i].nama);
     }
   });
@@ -347,13 +359,16 @@ $('#example23').DataTable({
   }
 
   $.ajax(settings).done(function (response) {
-    // var selectedKota=$("#getIdKota").val();
-
+    var selected=$("#getIdKota").val();
     items=JSON.parse(response);
     var akhir=items.length;
     $("#kota").append('<option value="null">Pilih Kota</option>');
     for(var i=0;i<akhir;i++){
-      $("#kota").append('<option value="'+items[i].id+'">'+items[i].nama+'</option>');
+      if(selected==items[i].id){
+        $("#kota").append('<option value="'+items[i].id+'" selected>'+items[i].nama+'</option>');
+      }else{
+        $("#kota").append('<option value="'+items[i].id+'">'+items[i].nama+'</option>');
+      }
       console.log(items[i].nama);
     }
   });

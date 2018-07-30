@@ -92,7 +92,7 @@ class Data_wisata extends MY_Controller
         'contain_view' => 'pemilik_wisata/data_wisata/data_wisata_edit',
         'sidebar'=>'pemilik_wisata/sidebar',//Ini buat menu yang ditampilkan di module admin {DIKIRIM KE TEMPLATE}
         'css'=>'pemilik_wisata/crudassets/css',//Ini buat kirim css dari page nya  {DIKIRIM KE TEMPLATE}
-        'script'=>'pemilik_wisata/crudassets/script',//ini buat javascript apa aja yang di load di page {DIKIRIM KE TEMPLATE}
+        'script'=>'pemilik_wisata/data_wisata/assets/scriptEdit',//ini buat javascript apa aja yang di load di page {DIKIRIM KE TEMPLATE}
         'action'=>'pemilik_wisata/data_wisata/update_action',
         'dataedit'=>$dataedit
        );
