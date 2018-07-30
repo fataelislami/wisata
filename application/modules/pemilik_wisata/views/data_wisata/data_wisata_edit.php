@@ -1,12 +1,43 @@
 <div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+              <div class="row">
+                  <div class="col-md-6">
+                      <h4 class="card-title">Selamat Datang di Admin Area</h4>
+                      <h6 class="card-subtitle">SIDOMA BOT by RPL-11</h6>
+                  </div>
+                  <div class="col-md-6 text-right">
+                  </div>
+              </div>
+              <div id="maps" style="width:940px; height:300px;">
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group">
+                          <label>alamat</label>
+                          <input type="text" id="alamat" class="form-control" placeholder="">
+                          <br>
+                          <br>
+                          <center><button href="#" class="btn btn-primary" onclick="cari_alamat()" >CARI ALAMAT</button></center>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
   <div class="col-12">
     <div class="card">
         <div class="card-body">
             <h4 class="card-title">Tambah Data_wisata</h4>
-            <form class="form-material m-t-40" method="post" action="<?php echo base_url().$action ?>">
+            <form class="form-material m-t-40" method="post" action="<?php echo base_url().$action ?>" enctype="multipart/form-data">
 	  <div class="form-group">
                     <label>id</label>
-                    <input type="text" name="id" class="form-control" placeholder="" value="<?php echo $dataedit->id?>" readonly>
+                    <input type="text" id="id_wisata" name="id" class="form-control" placeholder="" value="<?php echo $dataedit->id?>" readonly>
             </div>
 	  <div class="form-group">
             <label>nama</label>
@@ -14,15 +45,15 @@
     </div>
 	  <div class="form-group">
             <label>lat</label>
-            <input type="text" name="lat" class="form-control" value="<?php echo $dataedit->lat?>">
+            <input type="text" id="lat" name="lat" class="form-control" value="<?php echo $dataedit->lat?>">
     </div>
 	  <div class="form-group">
             <label>lang</label>
-            <input type="text" name="lang" class="form-control" value="<?php echo $dataedit->lang?>">
+            <input type="text" id="lng" name="lang" class="form-control" value="<?php echo $dataedit->lang?>">
     </div>
 	  <div class="form-group">
             <label>alamat</label>
-            <input type="text" name="alamat" class="form-control" value="<?php echo $dataedit->alamat?>">
+            <input type="text" id="alamatFix" name="alamat" class="form-control" value="<?php echo $dataedit->alamat?>">
     </div>
 	  <div class="form-group">
             <label>keterangan</label>
@@ -64,6 +95,13 @@
 	  <div class="form-group">
             <label>htm_anak</label>
             <input type="text" name="htm_anak" class="form-control" value="<?php echo $dataedit->htm_anak?>">
+    </div>
+    <div id="getGambar">
+
+    </div>
+    <div class="form-group">
+            <label>Gambar</label>
+            <input type="file" name="gambar[]" multiple>
     </div>
 
 

@@ -295,6 +295,7 @@ $('#example23').DataTable({
 <script type="text/javascript">
   $(document).ready(function(){
     loadKota();
+    loadgambar($("#id_wisata").val());
     loadkecamatan($("#getIdKota").val());
     loadkelurahan($("#getIdKecamatan").val());
 
@@ -373,6 +374,22 @@ $('#example23').DataTable({
       console.log(items[i].nama);
     }
   });
+    }
+
+    function loadgambar(id_wisata){
+      var settings = {
+      "url": "<?php echo base_url()?>json/get_gambar_by_id/"+id_wisata,
+      "method": "GET",
+      }
+
+      $.ajax(settings).done(function (response) {
+      items=JSON.parse(response);
+      var akhir=items.length;
+      for(var i=0;i<akhir;i++){
+        $("#getGambar").append('<div class="card" style="width: 20rem;"><img class="card-img-top" src="<?php echo base_url()?>upload_area/gambar_wisata/'+items[i].url+'" alt="Card image cap"><div class="card-body"><a href="#" id="btnDelete" class="btn btn-primary">DELETE</a></div></div>');
+      console.log(items[i].url);
+      }
+      });
     }
 
   });

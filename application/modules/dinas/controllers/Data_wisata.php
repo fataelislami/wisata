@@ -169,6 +169,26 @@ class Data_wisata extends MY_Controller
 	    );
 
             $this->Data_wisata_model->update($this->input->post('id', TRUE), $data);
+            //MULTIPLE UPLOAD START
+            $id_wisata=$this->input->post('id', TRUE);
+            $limitLoop=sizeof($_FILES['gambar']['name']);
+            if($limitLoop!=0){
+              for ($i=0; $i <$limitLoop ; $i++) {
+                $_FILES['file']['name']     = $_FILES['gambar']['name'][$i];
+                $_FILES['file']['type']     = $_FILES['gambar']['type'][$i];
+                $_FILES['file']['tmp_name'] = $_FILES['gambar']['tmp_name'][$i];
+                $_FILES['file']['error']     = $_FILES['gambar']['error'][$i];
+                $_FILES['file']['size']     = $_FILES['gambar']['size'][$i];
+                $foto=$this->upload_foto('file');
+                $dataFoto=array(
+                  'url'=>$foto['file_name'],
+                  'id_wisata'=>$id_wisata
+                );
+                $this->Dbs->insert($dataFoto,'gambar');
+              }
+            }
+
+            //MULTIPLE UPLOAD END
             $this->session->set_flashdata('message', 'Update Record Success');
             redirect(site_url('dinas/data_wisata'));
         }

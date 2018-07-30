@@ -88,13 +88,21 @@ class Data_wisata extends MY_Controller
 
     public function edit($id){
       $dataedit=$this->Data_wisata_model->get_by_id($id);
+      $polygon1=$this->Dbs->getwhere('id_polygon',1,'polygon')->row()->coordinate;
+      $polygon2=$this->Dbs->getwhere('id_polygon',2,'polygon')->row()->coordinate;
+      $polygon3=$this->Dbs->getwhere('id_polygon',3,'polygon')->row()->coordinate;
+      $polygon4=$this->Dbs->getwhere('id_polygon',4,'polygon')->row()->coordinate;
       $data = array(
         'contain_view' => 'pemilik_wisata/data_wisata/data_wisata_edit',
         'sidebar'=>'pemilik_wisata/sidebar',//Ini buat menu yang ditampilkan di module admin {DIKIRIM KE TEMPLATE}
         'css'=>'pemilik_wisata/crudassets/css',//Ini buat kirim css dari page nya  {DIKIRIM KE TEMPLATE}
         'script'=>'pemilik_wisata/data_wisata/assets/scriptEdit',//ini buat javascript apa aja yang di load di page {DIKIRIM KE TEMPLATE}
         'action'=>'pemilik_wisata/data_wisata/update_action',
-        'dataedit'=>$dataedit
+        'dataedit'=>$dataedit,
+        'polygon1'=>$polygon1,
+        'polygon2'=>$polygon2,
+        'polygon3'=>$polygon3,
+        'polygon4'=>$polygon4,
        );
       $this->template->load($data);
     }
@@ -181,6 +189,26 @@ class Data_wisata extends MY_Controller
 	    );
 
             $this->Data_wisata_model->update($this->input->post('id', TRUE), $data);
+            //MULTIPLE UPLOAD START
+            $id_wisata=$this->input->post('id', TRUE);
+            $limitLoop=sizeof($_FILES['gambar']['name']);
+            if($limitLoop!=0){
+              for ($i=0; $i <$limitLoop ; $i++) {
+                $_FILES['file']['name']     = $_FILES['gambar']['name'][$i];
+                $_FILES['file']['type']     = $_FILES['gambar']['type'][$i];
+                $_FILES['file']['tmp_name'] = $_FILES['gambar']['tmp_name'][$i];
+                $_FILES['file']['error']     = $_FILES['gambar']['error'][$i];
+                $_FILES['file']['size']     = $_FILES['gambar']['size'][$i];
+                $foto=$this->upload_foto('file');
+                $dataFoto=array(
+                  'url'=>$foto['file_name'],
+                  'id_wisata'=>$id_wisata
+                );
+                $this->Dbs->insert($dataFoto,'gambar');
+              }
+            }
+
+            //MULTIPLE UPLOAD END
             $this->session->set_flashdata('message', 'Update Record Success');
             redirect(site_url('pemilik_wisata/data_wisata'));
         }

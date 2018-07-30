@@ -1,7 +1,21 @@
 <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false&key=AIzaSyB3sQdBeiGlXTeWmWAOffst7X8syIzs2vY&libraries=places"></script>
 <script type="text/javascript">
 
- var triangleCoords = [<?php echo $polygon ?>];
+ var triangleCoords = [
+            <?php echo $polygon1 ?>
+    ];
+
+    var triangleCoords2 = [
+      <?php echo $polygon2 ?>
+       ];
+
+       var triangleCoords3 = [
+         <?php echo $polygon3 ?>
+          ];
+
+          var triangleCoords4 = [
+            <?php echo $polygon4 ?>
+             ];
 
 
 
@@ -29,9 +43,44 @@ function init(){
       fillOpacity: 0.35
       });
 
+var polygon2 = new google.maps.Polygon({
+           path:triangleCoords2,
+           strokeColor: '#f8dd5d',
+           strokeOpacity: 0.8,
+           strokeWeight: 3,
+           fillColor: '#f8dd5d',
+           fillOpacity: 0.35
+           });
+var polygon3 = new google.maps.Polygon({
+                      path:triangleCoords3,
+                      strokeColor: '#52a98b',
+                      strokeOpacity: 0.8,
+                      strokeWeight: 3,
+                      fillColor: '#52a98b',
+                      fillOpacity: 0.35
+                      });
+var polygon4 = new google.maps.Polygon({
+              path:triangleCoords4,
+              strokeColor: '#34275B',
+              strokeOpacity: 0.8,
+              strokeWeight: 3,
+              fillColor: '#34275B',
+              fillOpacity: 0.35
+              });
+//pastikan jumlah setMap sama dengan jumlah variable
  polygon.setMap(map);
+ polygon2.setMap(map);
+ polygon3.setMap(map);
+ polygon4.setMap(map);
+
+
+ //pastikan jumlah addListener sama dengan jumlah variable
 
  polygon.addListener('click', showArrays);
+ polygon2.addListener('click', showArrays);
+ polygon3.addListener('click', showArrays);
+ polygon4.addListener('click', showArrays);
+
 
 }
 
@@ -157,8 +206,31 @@ function cari_alamat(){
             fillColor: '#FF0000',
             fillOpacity: 0.35
             });
-
-         if (polygon.Contains(point)) {
+            var polygon2 = new google.maps.Polygon({
+                    path:triangleCoords2,
+                    strokeColor: '#f8dd5d',
+                    strokeOpacity: 0.8,
+                    strokeWeight: 3,
+                    fillColor: '#f8dd5d',
+                    fillOpacity: 0.35
+                    });
+                    var polygon3 = new google.maps.Polygon({
+                            path:triangleCoords3,
+                            strokeColor: '#52a98b',
+                            strokeOpacity: 0.8,
+                            strokeWeight: 3,
+                            fillColor: '#52a98b',
+                            fillOpacity: 0.35
+                            });
+                            var polygon4 = new google.maps.Polygon({
+                                    path:triangleCoords4,
+                                    strokeColor: '#34275B',
+                                    strokeOpacity: 0.8,
+                                    strokeWeight: 3,
+                                    fillColor: '#34275B',
+                                    fillOpacity: 0.35
+                                    });
+         if (polygon.Contains(point)===true || polygon2.Contains(point)===true || polygon3.Contains(point)===true || polygon4.Contains(point)===true) {
               // point is inside polygon
 
             // menampilkan latitude dan longitude pada id lat dan lng
@@ -172,7 +244,12 @@ function cari_alamat(){
               'zoom': 17,
               'mapTypeId': google.maps.MapTypeId.ROADMAP
              });
+             //Set warna poligon ketika klik search, pastikan variable polygon sesuai dengan yang dibuat
             polygon.setMap(map);
+            polygon2.setMap(map);
+            polygon3.setMap(map);
+            polygon4.setMap(map);
+
 
             // menambahkan marker pada peta
             var marker = new google.maps.Marker({
@@ -295,6 +372,7 @@ $('#example23').DataTable({
 <script type="text/javascript">
   $(document).ready(function(){
     loadKota();
+    loadgambar($("#id_wisata").val());
     loadkecamatan($("#getIdKota").val());
     loadkelurahan($("#getIdKecamatan").val());
 
@@ -374,6 +452,23 @@ $('#example23').DataTable({
     }
   });
     }
+
+    function loadgambar(id_wisata){
+      var settings = {
+      "url": "<?php echo base_url()?>json/get_gambar_by_id/"+id_wisata,
+      "method": "GET",
+      }
+
+      $.ajax(settings).done(function (response) {
+      items=JSON.parse(response);
+      var akhir=items.length;
+      for(var i=0;i<akhir;i++){
+        $("#getGambar").append('<div class="card" style="width: 20rem;"><img class="card-img-top" src="<?php echo base_url()?>upload_area/gambar_wisata/'+items[i].url+'" alt="Card image cap"><div class="card-body"><a href="#" id="btnDelete" class="btn btn-primary">DELETE</a></div></div>');
+      console.log(items[i].url);
+      }
+      });
+    }
+
 
   });
 </script>

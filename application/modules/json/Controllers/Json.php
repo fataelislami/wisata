@@ -44,4 +44,10 @@ class Json extends MY_Controller{
     echo $json;
   }
 
+  function get_gambar_by_id($id){
+    $data=$this->Dbs->getwhere('id_wisata',$id,'gambar')->result();
+    $json=json_encode($data);
+    echo $json;
+  }
+
 }

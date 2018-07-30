@@ -3,10 +3,10 @@
     <div class="card">
         <div class="card-body">
             <h4 class="card-title">Tambah Data_wisata</h4>
-            <form class="form-material m-t-40" method="post" action="<?php echo base_url().$action ?>">
+            <form class="form-material m-t-40" method="post" action="<?php echo base_url().$action ?>" enctype="multipart/form-data">
 	  <div class="form-group">
                     <label>id</label>
-                    <input type="text" name="id" class="form-control" placeholder="" value="<?php echo $dataedit->id?>" readonly>
+                    <input type="text" id="id_wisata" name="id" class="form-control" placeholder="" value="<?php echo $dataedit->id?>" readonly>
             </div>
 	  <div class="form-group">
             <label>nama</label>
@@ -64,6 +64,13 @@
 	  <div class="form-group">
             <label>htm_anak</label>
             <input type="text" name="htm_anak" class="form-control" value="<?php echo $dataedit->htm_anak?>">
+    </div>
+    <div id="getGambar">
+      
+    </div>
+    <div class="form-group">
+            <label>Gambar</label>
+            <input type="file" name="gambar[]" multiple>
     </div>
 
 
