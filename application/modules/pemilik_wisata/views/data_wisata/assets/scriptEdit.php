@@ -325,8 +325,9 @@ $('#example23').DataTable({
     for(var i=0;i<akhir;i++){
       if(items[i].id==selectedKelurahan){
         $("#kelurahan").append('<option value="'+items[i].id+'" selected>'+items[i].nama+'</option>');
+      }else{
+        $("#kelurahan").append('<option value="'+items[i].id+'">'+items[i].nama+'</option>');
       }
-      $("#kelurahan").append('<option value="'+items[i].id+'">'+items[i].nama+'</option>');
       console.log(items[i].nama);
     }
   });
