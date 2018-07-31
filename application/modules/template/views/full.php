@@ -139,7 +139,7 @@
                                             <div class="u-img"><img src="#" alt="user"></div>
                                             <div class="u-text">
                                                 <h4>NAME</h4>
-                                                <p class="text-muted">USERNAME</p><a href="/profile" class="btn btn-rounded btn-danger btn-sm">View Profile</a></div>
+                                                <p class="text-muted">USERNAME</p><a href="<?php echo base_url().$this->session->userdata('level'); ?>/profile?id=<?php echo $this->session->userdata('id'); ?>" class="btn btn-rounded btn-danger btn-sm">View Profile</a></div>
                                         </div>
                                     </li>
                                     <li role="separator" class="divider"></li>
