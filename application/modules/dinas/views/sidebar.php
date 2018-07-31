@@ -5,11 +5,20 @@
             <a class="waves-effect waves-dark" href="<?php echo base_url()?>dinas"><i class="mdi mdi-gauge"></i><span class="hide-menu">Dashboard </span></a>
         </li>
         <li>
+            <a class="waves-effect waves-dark" href="<?php echo base_url()?>dinas/data_wisata"><i class="mdi mdi-gauge"></i><span class="hide-menu">Data Wisata </span></a>
+        </li>
+        <li>
             <a class="waves-effect waves-dark" href="<?php echo base_url()?>dinas/pemilik_wisata"><i class="mdi mdi-gauge"></i><span class="hide-menu">Pemilik Wisata </span></a>
         </li>
         <li>
-            <a class="waves-effect waves-dark" href="<?php echo base_url()?>dinas/kota"><i class="mdi mdi-gauge"></i><span class="hide-menu">Kota </span></a>
+            <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-pencil"></i><span class="hide-menu">Kelola Wilayah</span></a>
+            <ul aria-expanded="false" class="collapse">
+                <li><a href="<?php echo base_url()?>dinas/kecamatan">Kecamatan</a></li>
+                <li><a href="<?php echo base_url()?>dinas/kelurahan">Kelurahan</a></li>
+            </ul>
         </li>
+
+
         <!-- <li>
             <a class="waves-effect waves-dark" href="<?php echo base_url()?>admin/users"><i class="mdi mdi-account-multiple"></i><span class="hide-menu">Member </span></a>
         </li> -->

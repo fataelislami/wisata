@@ -14,7 +14,7 @@
     </div>
 	  <div class="form-group">
             <label>password</label>
-            <input type="text" name="password" class="form-control" value="<?php echo $dataedit->password?>">
+            <input type="text" name="password" class="form-control" placeholder="masukan password baru">
     </div>
 	  <div class="form-group">
             <label>nama</label>
@@ -32,15 +32,19 @@
             <label>foto</label>
             <input type="text" name="foto" class="form-control" value="<?php echo $dataedit->foto?>">
     </div>
-	  <div class="form-group">
+    <div class="form-group">
             <label>status</label>
-            <input type="text" name="status" class="form-control" value="<?php echo $dataedit->status?>">
+            <select class="form-control" name="status">
+              <option value="null">---</option>
+              <option value="aktif" <?php if($dataedit->status=='aktif'){echo "selected";} ?>>Aktif</option>
+              <option value="pending" <?php if($dataedit->status=='pending'){echo "selected";} ?>>Pending</option>
+            </select>
     </div>
 	  <div class="form-group">
             <label>level</label>
             <input type="text" name="level" class="form-control" value="<?php echo $dataedit->level?>">
     </div>
-	
+
                 <div class="form-group">
                   <button type="submit" class="btn btn-success waves-effect waves-light m-r-10">Submit</button>
                 </div>

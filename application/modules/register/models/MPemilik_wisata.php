@@ -84,6 +84,12 @@ class MPemilik_wisata extends CI_Model
         $this->db->update($this->table, $data);
     }
 
+    function update_by_ktp($ktp, $data)
+    {
+        $this->db->where('no_ktp', $ktp);
+        $this->db->update($this->table, $data);
+    }
+
     // delete data
     function delete($id)
     {

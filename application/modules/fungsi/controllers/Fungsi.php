@@ -37,8 +37,8 @@ class Fungsi extends MY_Controller{
   $this->email->send();
 }
 
-public function upload_foto(){
-$config['upload_path']          = './assets/{destinasi}';
+public function upload_foto($formname){
+$config['upload_path']          = './upload_area/{nama_folder}';
 $config['allowed_types']        = 'gif|jpg|png|jpeg';
 $config['encrypt_name'] = TRUE;
 //$config['max_size']             = 100;

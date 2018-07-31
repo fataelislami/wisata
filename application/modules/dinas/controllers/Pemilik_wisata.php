@@ -63,15 +63,17 @@ class Pemilik_wisata extends MY_Controller
         if ($this->form_validation->run() == FALSE) {
             $this->create();
         } else {
+          $foto=$this->upload_foto('file_ktp');
             $data = array(
-		'username' => $this->input->post('username',TRUE),
+		'username' => $this->input->post('email',TRUE),
 		'password' => md5($this->input->post('password',TRUE)),
 		'nama' => $this->input->post('nama',TRUE),
 		'email' => $this->input->post('email',TRUE),
 		'alamat' => $this->input->post('alamat',TRUE),
 		'jenis_kelamin' => $this->input->post('jenis_kelamin',TRUE),
 		'tanggal_lahir' => $this->input->post('tanggal_lahir',TRUE),
-		'file_ktp' => $this->input->post('file_ktp',TRUE),
+    'no_ktp' => $this->input->post('no_ktp',TRUE),
+		'file_ktp' => $foto['file_name'],
 		'status' => $this->input->post('status',TRUE),
 		'id_admin_dinas' => $this->session->userdata('id'),//mengambil id admin dinas dari session ketika login
 	    );
@@ -91,39 +93,55 @@ class Pemilik_wisata extends MY_Controller
         if ($this->form_validation->run() == FALSE) {
             $this->edit($this->input->post('id', TRUE));
         } else {
+
           if($_POST['password']!=''){
+            if($_POST['aktivasi']=='ya'){
+              $id_admin_dinasi=$this->session->userdata('id');
+            }else{
+              $id_admin_dinasi=null;
+            }
+
             $data = array(
-        		'username' => $this->input->post('username',TRUE),
+        		'username' => $this->input->post('email',TRUE),
         		'password' => md5($this->input->post('password',TRUE)),
         		'nama' => $this->input->post('nama',TRUE),
         		'email' => $this->input->post('email',TRUE),
         		'alamat' => $this->input->post('alamat',TRUE),
         		'jenis_kelamin' => $this->input->post('jenis_kelamin',TRUE),
         		'tanggal_lahir' => $this->input->post('tanggal_lahir',TRUE),
-        		'file_ktp' => $this->input->post('file_ktp',TRUE),
+            'no_ktp' => $this->input->post('no_ktp',TRUE),
         		'status' => $this->input->post('status',TRUE),
-            'id_admin_dinas' => $this->session->userdata('id'),//mengambil id admin dinas dari session ketika login
+            'id_admin_dinas' => $id_admin_dinasi,//mengambil id admin dinas dari session ketika login
         	    );
+              if($_FILES['file_ktp']['name']!=''){//pengecekan
+                $foto=$this->upload_foto('file_ktp');
+                $data['file_ktp']=$foto['file_name'];
+              }
           }else{
+            if($_POST['aktivasi']=='ya'){
+              $this->email('Info Aktivasi Akun','Selamat Akun Anda Sudah Diaktifkan Oleh Admin Dinas',$this->input->post('email',TRUE));
+              $id_admin_dinasi=$this->session->userdata('id');
+            }else{
+              $this->email('Info Aktivasi Akun','Akun Anda Di nonaktifkan Oleh Admin Dinas',$this->input->post('email',TRUE));
+              $id_admin_dinasi=null;
+            }
+
             $data = array(
-		'username' => $this->input->post('username',TRUE),
+		'username' => $this->input->post('email',TRUE),
 		'nama' => $this->input->post('nama',TRUE),
 		'email' => $this->input->post('email',TRUE),
 		'alamat' => $this->input->post('alamat',TRUE),
 		'jenis_kelamin' => $this->input->post('jenis_kelamin',TRUE),
 		'tanggal_lahir' => $this->input->post('tanggal_lahir',TRUE),
-		'file_ktp' => $this->input->post('file_ktp',TRUE),
+    'no_ktp' => $this->input->post('no_ktp',TRUE),
 		'status' => $this->input->post('status',TRUE),
-    'id_admin_dinas' => $this->session->userdata('id'),//mengambil id admin dinas dari session ketika login
+    'id_admin_dinas' => $id_admin_dinasi,//mengambil id admin dinas dari session ketika login
 	    );
+      if($_FILES['file_ktp']['name']!=''){
+        $foto=$this->upload_foto('file_ktp');
+        $data['file_ktp']=$foto['file_name'];
+      }
           }
-
-          if($this->input->post('status',TRUE)=='aktif'){
-            $this->email('Info Aktivasi Akun','Selamat Akun Anda Sudah Diaktifkan Oleh Admin Dinas',$this->input->post('email',TRUE));
-          }else{
-            $this->email('Info Aktivasi Akun','Akun Anda Di nonaktifkan Oleh Admin Dinas',$this->input->post('email',TRUE));
-          }
-
 
             $this->MPemilik_wisata->update($this->input->post('id', TRUE), $data);
             $this->session->set_flashdata('message', 'Update Record Success');
@@ -154,6 +172,19 @@ class Pemilik_wisata extends MY_Controller
     $this->email->send();
   }
 
+  public function upload_foto($formname){
+  $config['upload_path']          = './upload_area/pemilik_wisata';
+  $config['allowed_types']        = 'gif|jpg|png|jpeg';
+  $config['encrypt_name'] = FALSE;
+  //$config['max_size']             = 100;
+  //$config['max_width']            = 1024;
+  //$config['max_height']           = 768;
+  $this->load->library('upload', $config);
+  $this->upload->do_upload($formname);
+  return $this->upload->data();
+
+  }
+
     public function delete($id)
     {
         $row = $this->MPemilik_wisata->get_by_id($id);
@@ -170,13 +201,11 @@ class Pemilik_wisata extends MY_Controller
 
     public function _rules()
     {
-	$this->form_validation->set_rules('username', 'username', 'trim|required');
 	$this->form_validation->set_rules('nama', 'nama', 'trim|required');
 	$this->form_validation->set_rules('email', 'email', 'trim|required');
 	$this->form_validation->set_rules('alamat', 'alamat', 'trim|required');
 	$this->form_validation->set_rules('jenis_kelamin', 'jenis kelamin', 'trim|required');
 	$this->form_validation->set_rules('tanggal_lahir', 'tanggal lahir', 'trim|required');
-	$this->form_validation->set_rules('file_ktp', 'file ktp', 'trim|required');
 	$this->form_validation->set_rules('status', 'status', 'trim|required');
 
 	$this->form_validation->set_rules('id', 'id', 'trim');

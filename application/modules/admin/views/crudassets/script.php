@@ -85,3 +85,25 @@ $('#example23').DataTable({
     ]
 });
 </script>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    loadKota();
+    function loadKota(){
+      var settings = {
+    "url": "<?php echo base_url()?>json/get_kota",
+    "method": "GET",
+  }
+
+  $.ajax(settings).done(function (response) {
+    items=JSON.parse(response);
+    var akhir=items.length;
+    $("#kota").append('<option value="null">Pilih Kota</option>');
+    for(var i=0;i<akhir;i++){
+      $("#kota").append('<option value="'+items[i].id+'">'+items[i].nama+'</option>');
+      console.log(items[i].nama);
+    }
+  });
+    }
+  });
+</script>
